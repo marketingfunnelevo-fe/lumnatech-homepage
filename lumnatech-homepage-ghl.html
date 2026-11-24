@@ -28,7 +28,6 @@ window.LUMNA_CONFIG = {
 
   /* MAKLUMAT HUBUNGI (footer) */
   contact: {
-    email:   "[EMEL_RASMI]",
     address: "LumnaTech, Jalan PJU 5/10, Dataran Sunway, Kota Damansara, 47810 Petaling Jaya, Selangor"
   },
 
@@ -493,7 +492,7 @@ window.LUMNA_CONFIG = {
 #lumna-home .lumna-cta .lumna-pin{width:560px;height:560px;left:50%;top:50%;margin:-280px 0 0 -280px;opacity:.08;animation:lumnaSpin 70s linear infinite}
 #lumna-home .lumna-cta__in{position:relative;max-width:780px;margin:0 auto}
 #lumna-home .lumna-cta .lumna-eyebrow{color:var(--y)}
-#lumna-home .lumna-cta h2{font-family:var(--head);font-weight:800;font-size:clamp(34px,4.6vw,62px);line-height:1.04;letter-spacing:-.04em;margin-top:20px}
+#lumna-home .lumna-cta h2{font-family:var(--head);font-weight:800;font-size:clamp(34px,4.6vw,62px);line-height:1.04;letter-spacing:-.04em;margin-top:0}
 #lumna-home .lumna-cta p{font-size:18.5px;line-height:1.65;color:rgba(255,255,255,.78);margin:22px auto 0;max-width:600px}
 #lumna-home .lumna-cta__btns{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:40px}
 #lumna-home .lumna-cta__svc{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px}
@@ -1034,7 +1033,6 @@ setTimeout(function(){if(!window.__lumnaHomeInit){r.classList.remove('lumna-js')
     <div class="lumna-cta lumna-reveal lumna-reveal--zoom" id="lumna-contact-cta">
       <svg class="lumna-pin" aria-hidden="true" data-lumna-play><use href="#lumna-pinwheel"/></svg>
       <div class="lumna-cta__in">
-        <p class="lumna-eyebrow">Jom Mula</p>
         <h2>Sedia Nak <span style="color:var(--y)">Automasikan</span> Bisnes Anda?</h2>
         <p>Ceritakan keperluan bisnes anda. Kami bantu cadangkan solusi yang paling sesuai.</p>
         <div class="lumna-cta__btns">
@@ -1073,7 +1071,6 @@ setTimeout(function(){if(!window.__lumnaHomeInit){r.classList.remove('lumna-js')
         <h4>Hubungi</h4>
         <!-- Ganti placeholder dengan maklumat rasmi -->
         <ul class="lumna-footer__contact">
-          <li><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-mail"/></svg><a href="#" data-lumna-email>[EMEL_RASMI]</a></li>
           <li><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-pin"/></svg><span data-lumna-address>[ALAMAT_LUMNATECH]</span></li>
         </ul>
         <a class="lumna-wa" href="#" data-lumna-link="whatsapp" target="_blank" rel="noopener">
@@ -1127,8 +1124,6 @@ setTimeout(function(){if(!window.__lumnaHomeInit){r.classList.remove('lumna-js')
       else { a.setAttribute('href', '#'); a.addEventListener('click', function (e) { e.preventDefault(); }); }
     });
     var contact = CFG.contact || {};
-    var emEl = root.querySelector('[data-lumna-email]');
-    if (emEl && contact.email) { emEl.textContent = contact.email; if (contact.email.charAt(0) !== '[') emEl.href = 'mailto:' + contact.email; }
     var adEl = root.querySelector('[data-lumna-address]');
     if (adEl && contact.address) adEl.textContent = contact.address;
     var imgs = CFG.images || {};
