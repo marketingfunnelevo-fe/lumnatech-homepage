@@ -1,0 +1,1365 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LumnaTech Homepage Preview</title><style>body{margin:0}</style></head><body>
+<!-- =====================================================================
+  LUMNATECH: PREMIUM ANIMATED HOMEPAGE  (v2)
+  Untuk GoHighLevel (GHL) > Custom HTML/JS element.
+  - Semua CSS di-scope dalam #lumna-home, class guna awalan "lumna-".
+  - Tiada framework. CSS keyframes + IntersectionObserver + JS ringan.
+  - TUKAR pautan, gambar, testimoni & logo pelanggan di LUMNA_CONFIG sahaja.
+====================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+/* =====================================================================
+   LUMNA_CONFIG: SATU-SATUNYA TEMPAT YANG PERLU DIUBAH
+===================================================================== */
+window.LUMNA_CONFIG = {
+
+  /* 1) PAUTAN LANDING PAGE: gantikan dengan URL sebenar */
+  links: {
+    home:    "#top",   /* "#top" = scroll ke atas page. Boleh tukar kepada URL. */
+    crm:     "https://lumnatech.com/home",
+    chatbot: "https://www.lumnatech.com/home-page",
+    claude:  "https://claude.lumnatech.vip/",
+    contact: "https://wa.me/60182221874?text=Hai%2C%20saya%20nak%20dapatkan%20servis%20LumnaTech.",   /* semua butang Contact Us / Hubungi Kami */
+    whatsapp: "https://wa.me/60182221874?text=Hai%2C%20saya%20nak%20dapatkan%20servis%20LumnaTech."
+  },
+
+  /* MAKLUMAT HUBUNGI (footer) */
+  contact: {
+    email:   "[EMEL_RASMI]",
+    address: "LumnaTech, Jalan PJU 5/10, Dataran Sunway, Kota Damansara, 47810 Petaling Jaya, Selangor"
+  },
+
+  /* 2) GAMBAR: upload ke GHL Media Library, kemudian tampal URL di sini */
+  images: {
+    logo:     "assets/lumnatech-logo.webp",
+    hero:     "assets/lumna-hero-dashboard.webp",
+    channels: "assets/lumna-omnichannel.webp",
+    crm:      "assets/lumna-crm-pipeline.webp",
+    chatbot:  "assets/lumna-ai-automation.webp",
+    work:     "assets/lumna-dashboard-team.webp",
+    claude:   "assets/lumna-claude-class.jpg"   /* kosong = guna visual kelas Claude AI terbina */
+  },
+
+  /* 3) TESTIMONI: masukkan testimoni SEBENAR sahaja.
+        photo (pilihan): URL gambar pelanggan. Kosong = huruf awal nama.
+        result (pilihan): tajuk + baris sebelum/selepas. */
+  testimonials: [
+    {
+      tag: "CRM + AI Chatbot",
+      quote: "Semua chat masuk dilayan 24/7 tanpa miss. Baru 1 bulan pakai, Alhamdulillah kami berjaya close 30 student baru!",
+      name: "Teacher Yana", role: "Pusat Tuisyen Mawardah Ilmu", photo: "assets/testimonials/teacher-yana.png",
+      result: { title: "Student / bulan", rows: [["Sebelum", "10-15"], ["Selepas", "25-30"]] }
+    },
+    {
+      tag: "CRM + AI Chatbot",
+      quote: "Pengurusan patient kami jauh lebih teratur. AI jawab soalan yang ditanya, tak berjela, dan terus bagi link appointment.",
+      name: "Dr Zul", role: "Klinik Al Fatah, Parit Raja", photo: "assets/testimonials/dr-zul.png",
+      result: { title: "Appointment closed", rows: [["Sebelum", "2-5"], ["Selepas", "20-25"]] }
+    },
+    {
+      tag: "CRM + AI Chatbot",
+      quote: "Saya tidur pun AI boleh reply, siap convincekan client buat deposit lagi!",
+      name: "Puan Faridah", role: "Founder, Pusat Urut Legasi Bonda", photo: "assets/testimonials/puan-faridah.png",
+      result: { title: "Dalam kurang 2 minggu", rows: [["Booking", "+10"], ["Jualan", "RM2,000"]] }
+    },
+    {
+      tag: "Claude AI Class",
+      quote: "Seronok sangat tengok website saya yang dibina guna Claude AI. Cantik sangat dan very very impressive!",
+      name: "Fazs Faozi", role: "Beautician", photo: "assets/testimonials/faz-fauzi.png",
+      link: { label: "Lihat website Fazs Faozi", url: "https://www.fazsfaozibeaute.com/" }
+    },
+    {
+      tag: "CRM + AI Chatbot",
+      quote: "Sekarang saya boleh pantau team, contact klien, dan track semua sales serta rekod dalam satu sistem.",
+      name: "Puan Faridah", role: "Owner, Faridism Production", photo: "assets/testimonials/faridism-production.png"
+    }
+  ],
+
+  /* 4) LOGO PELANGGAN: img: URL logo (PNG/SVG lutsinar). Kosong = placeholder. */
+  clientLogos: [
+    { name: "Cakap Jepun",              img: "assets/clients/cakap-jepun.png" },
+    { name: "Defect Pro Malaysia",      img: "assets/clients/defect-pro.png" },
+    { name: "Foleva Travel & Tours",    img: "assets/clients/foleva.png" },
+    { name: "Klinik Al-Fatah Parit Raja", img: "assets/clients/klinik-al-fatah.png" },
+    { name: "Kamal & Kamal",            img: "assets/clients/kamal-kamal.png" },
+    { name: "Teacher Siti Academy",     img: "assets/clients/teacher-siti.png" },
+    { name: "Mubin Trading",            img: "assets/clients/mubin-trading.png" },
+    { name: "Noble Cars Kuantan",       img: "assets/clients/noble-cars.png" },
+    { name: "Logo pelanggan",           img: "assets/clients/client-m.png" }
+  ]
+};
+</script>
+
+<style>
+/* =====================================================================
+   BASE (scoped)
+===================================================================== */
+#lumna-home{
+  --b:#0B1BDB; --b-600:#0815B8; --b-800:#06108A; --b-900:#040A55;
+  --ink:#0A0F3C; --muted:#5B6386; --y:#FFE500; --y-600:#F2D000;
+  --tint:#F4F6FF; --tint-2:#E8ECFF; --line:rgba(10,15,60,.10); --line-2:rgba(10,15,60,.16);
+  --ease:cubic-bezier(.22,.61,.36,1); --ease-out:cubic-bezier(.16,1,.3,1);
+  --head:"Plus Jakarta Sans","Poppins","Inter",system-ui,sans-serif;
+  position:relative;background:#fff;color:var(--ink);
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip;text-align:left
+}
+#lumna-home *,#lumna-home *::before,#lumna-home *::after{box-sizing:border-box}
+#lumna-home h1,#lumna-home h2,#lumna-home h3,#lumna-home h4,#lumna-home p,#lumna-home ul,#lumna-home ol,#lumna-home li,#lumna-home figure,#lumna-home blockquote{margin:0;padding:0}
+#lumna-home ul,#lumna-home ol{list-style:none}
+#lumna-home a{color:inherit;text-decoration:none}
+#lumna-home button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+#lumna-home img{display:block;max-width:100%}
+#lumna-home svg{display:block;flex-shrink:0}
+#lumna-home a:focus-visible,#lumna-home button:focus-visible{outline:2px solid var(--y);outline-offset:3px;border-radius:10px}
+#lumna-home .lumna-ic{width:20px;height:20px}
+#lumna-home .lumna-container{width:100%;max-width:1240px;margin:0 auto;padding:0 28px}
+#lumna-home .lumna-section{position:relative;padding:128px 0;scroll-margin-top:90px}
+
+#lumna-home .lumna-eyebrow{display:inline-block;font-family:var(--head);font-size:16px;font-weight:700;letter-spacing:0;color:var(--b)}
+#lumna-home .lumna-h2{font-family:var(--head);font-weight:800;font-size:clamp(32px,4.2vw,56px);line-height:1.06;letter-spacing:-.035em;color:var(--ink);margin-top:18px}
+#lumna-home .lumna-hl{color:var(--b)}
+#lumna-home .lumna-mark{background-image:linear-gradient(var(--y),var(--y));background-repeat:no-repeat;background-position:0 88%;background-size:100% .34em;padding:0 .06em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size .9s var(--ease-out) .35s}
+#lumna-home.lumna-js .lumna-reveal:not(.is-in) .lumna-mark{background-size:0% .34em}
+#lumna-home .lumna-lead{font-size:18.5px;color:var(--muted);line-height:1.65;margin-top:20px}
+#lumna-home .lumna-head{max-width:820px;margin:0 auto 64px;text-align:center}
+#lumna-home .lumna-head .lumna-lead{max-width:640px;margin-left:auto;margin-right:auto}
+
+/* Buttons */
+#lumna-home .lumna-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 28px;border-radius:999px;font-weight:700;font-size:15.5px;line-height:1;white-space:nowrap;isolation:isolate;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background-color .3s,color .3s,border-color .3s}
+#lumna-home .lumna-btn .lumna-ic{width:18px;height:18px;transition:transform .35s var(--ease)}
+#lumna-home .lumna-btn:hover .lumna-ic{transform:translateX(4px)}
+#lumna-home .lumna-btn::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);z-index:-1;transition:left .7s var(--ease)}
+#lumna-home .lumna-btn:hover::before{left:130%}
+#lumna-home .lumna-btn--y{background:var(--y);color:var(--ink);box-shadow:0 12px 32px -10px rgba(255,229,0,.55)}
+#lumna-home .lumna-btn--y:hover{transform:translateY(-3px);box-shadow:0 20px 40px -12px rgba(255,229,0,.7)}
+#lumna-home .lumna-btn--b{background:var(--b);color:#fff;box-shadow:0 12px 30px -12px rgba(11,27,219,.7)}
+#lumna-home .lumna-btn--b:hover{background:var(--b-600);transform:translateY(-3px);box-shadow:0 20px 40px -14px rgba(11,27,219,.75)}
+#lumna-home .lumna-btn--line{border:1.5px solid rgba(255,255,255,.35);color:#fff}
+#lumna-home .lumna-btn--line:hover{border-color:#fff;background:rgba(255,255,255,.08);transform:translateY(-3px)}
+#lumna-home .lumna-btn--ink{background:var(--ink);color:#fff}
+#lumna-home .lumna-btn--ink:hover{transform:translateY(-3px);box-shadow:0 18px 36px -16px rgba(10,15,60,.7)}
+
+/* Photo frame */
+#lumna-home .lumna-photo{position:relative;border-radius:28px;overflow:hidden;background:var(--tint-2);box-shadow:0 40px 90px -40px rgba(4,10,85,.55)}
+#lumna-home .lumna-photo img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease-out)}
+
+/* =====================================================================
+   NAVIGATION
+===================================================================== */
+#lumna-home .lumna-nav{position:sticky;top:0;z-index:80;background:rgba(255,255,255,.88);-webkit-backdrop-filter:saturate(1.8) blur(16px);backdrop-filter:saturate(1.8) blur(16px);border-bottom:1px solid transparent;transition:box-shadow .35s var(--ease),border-color .35s}
+#lumna-home .lumna-nav.is-scrolled{box-shadow:0 10px 30px -18px rgba(4,10,85,.35);border-color:var(--line)}
+#lumna-home .lumna-nav__inner{display:flex;align-items:center;justify-content:space-between;gap:20px;height:78px}
+#lumna-home .lumna-logo{display:inline-flex;align-items:center;flex-shrink:0}
+#lumna-home .lumna-logo img{height:48px;width:auto}
+#lumna-home .lumna-logo__txt{font-family:var(--head);font-weight:800;font-size:22px;color:var(--b)}
+#lumna-home .lumna-nav__menu{display:flex;align-items:center;gap:4px}
+#lumna-home .lumna-nav__link{position:relative;display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font-size:15px;font-weight:600;color:var(--ink);white-space:nowrap;transition:background-color .3s,color .3s}
+#lumna-home .lumna-nav__link .lumna-ic{width:16px;height:16px;transition:transform .35s var(--ease)}
+#lumna-home .lumna-nav__link:hover,#lumna-home .lumna-dd.is-open>.lumna-nav__link{background:var(--tint);color:var(--b)}
+#lumna-home .lumna-dd.is-open>.lumna-nav__link .lumna-ic{transform:rotate(180deg)}
+#lumna-home .lumna-dd{position:relative}
+#lumna-home .lumna-dd__panel{position:absolute;top:calc(100% + 14px);left:50%;min-width:340px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 34px 70px -26px rgba(4,10,85,.38);opacity:0;visibility:hidden;transform:translate(-50%,-10px);transition:opacity .28s var(--ease),transform .35s var(--ease-out),visibility 0s linear .3s}
+#lumna-home .lumna-dd__panel::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px}
+#lumna-home .lumna-dd__label{padding:8px 12px 6px;font-size:12.5px;font-weight:600;color:var(--muted)}
+#lumna-home .lumna-dd.is-open .lumna-dd__panel{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+@media (hover:hover) and (min-width:961px){
+  #lumna-home .lumna-dd:hover .lumna-dd__panel{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+  #lumna-home .lumna-dd:hover>.lumna-nav__link{background:var(--tint);color:var(--b)}
+  #lumna-home .lumna-dd:hover>.lumna-nav__link .lumna-ic{transform:rotate(180deg)}
+}
+#lumna-home .lumna-dd__item{display:flex;align-items:center;gap:14px;padding:12px;border-radius:16px;transition:background-color .25s}
+#lumna-home .lumna-dd__item:hover{background:var(--tint)}
+#lumna-home .lumna-dd__icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--tint-2);color:var(--b);flex-shrink:0;transition:background-color .3s,color .3s,transform .35s var(--ease)}
+#lumna-home .lumna-dd__icon--y{background:#FFF6B3;color:var(--ink)}
+#lumna-home .lumna-dd__item:hover .lumna-dd__icon{background:var(--b);color:#fff;transform:rotate(-6deg) scale(1.05)}
+#lumna-home .lumna-dd__item:hover .lumna-dd__icon--y{background:var(--y);color:var(--ink)}
+#lumna-home .lumna-dd__txt{flex:1;min-width:0}
+#lumna-home .lumna-dd__txt strong{display:block;font-size:15px;font-weight:700;color:var(--ink);line-height:1.3}
+#lumna-home .lumna-dd__txt small{display:block;font-size:13px;color:var(--muted);line-height:1.4;margin-top:2px}
+#lumna-home .lumna-dd__go{width:18px;height:18px;color:var(--b);opacity:0;transform:translateX(-6px);transition:opacity .25s,transform .3s var(--ease)}
+#lumna-home .lumna-dd__item:hover .lumna-dd__go{opacity:1;transform:none}
+#lumna-home .lumna-nav__right{display:flex;align-items:center;gap:10px}
+#lumna-home .lumna-nav__cta{height:48px;padding:0 22px;font-size:14.5px}
+#lumna-home .lumna-nav__cta .lumna-cta-ic{display:none}
+#lumna-home .lumna-burger{display:none;position:relative;width:46px;height:46px;border-radius:14px;border:1px solid var(--line-2);background:#fff}
+#lumna-home .lumna-burger span{position:absolute;left:13px;right:13px;height:2px;border-radius:2px;background:var(--ink);transition:transform .35s var(--ease),opacity .2s}
+#lumna-home .lumna-burger span:nth-child(1){top:16px}
+#lumna-home .lumna-burger span:nth-child(2){top:22px}
+#lumna-home .lumna-burger span:nth-child(3){top:28px}
+#lumna-home .lumna-nav.is-menu-open .lumna-burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+#lumna-home .lumna-nav.is-menu-open .lumna-burger span:nth-child(2){opacity:0}
+#lumna-home .lumna-nav.is-menu-open .lumna-burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+#lumna-home .lumna-mnav{display:none;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease-out)}
+#lumna-home .lumna-mnav__clip{overflow:hidden;min-height:0}
+#lumna-home .lumna-mnav__inner{padding:6px 20px 22px;border-top:1px solid var(--line);opacity:0;transform:translateY(-8px);transition:opacity .3s,transform .4s var(--ease-out)}
+#lumna-home .lumna-nav.is-menu-open .lumna-mnav{grid-template-rows:1fr}
+#lumna-home .lumna-nav.is-menu-open .lumna-mnav__inner{opacity:1;transform:none}
+#lumna-home .lumna-mnav__home{display:block;padding:16px 0;font-weight:700;font-size:16px;border-bottom:1px solid var(--line)}
+#lumna-home .lumna-acc{border-bottom:1px solid var(--line)}
+#lumna-home .lumna-acc__btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px 0;font-weight:700;font-size:16px;color:var(--ink)}
+#lumna-home .lumna-acc__btn .lumna-ic{width:18px;height:18px;transition:transform .35s var(--ease)}
+#lumna-home .lumna-acc.is-open .lumna-acc__btn{color:var(--b)}
+#lumna-home .lumna-acc.is-open .lumna-acc__btn .lumna-ic{transform:rotate(180deg)}
+#lumna-home .lumna-acc__body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease-out)}
+#lumna-home .lumna-acc.is-open .lumna-acc__body{grid-template-rows:1fr}
+#lumna-home .lumna-acc__body>div{overflow:hidden;min-height:0}
+#lumna-home .lumna-acc__body .lumna-dd__item{padding:10px 8px;margin-bottom:4px}
+#lumna-home .lumna-acc__body>div>a:last-child{margin-bottom:12px}
+#lumna-home .lumna-mnav .lumna-btn{width:100%;margin-top:18px}
+
+/* =====================================================================
+   HERO
+===================================================================== */
+#lumna-home .lumna-hero{position:relative;overflow:hidden;color:#fff;padding:96px 0 150px;
+  background:radial-gradient(900px 520px at 85% -10%,rgba(60,90,255,.85) 0%,rgba(60,90,255,0) 60%),radial-gradient(700px 500px at -10% 110%,rgba(11,27,219,.9) 0%,rgba(11,27,219,0) 60%),linear-gradient(160deg,#0B1BDB 0%,#06108A 55%,#040A55 100%)}
+#lumna-home .lumna-hero__bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#lumna-home .lumna-hero__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 60% 30%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 60% 30%,#000 10%,transparent 75%)}
+#lumna-home .lumna-pin{position:absolute;color:var(--y)}
+#lumna-home .lumna-hero .lumna-pin{width:760px;height:760px;right:-260px;top:-200px;opacity:.07;animation:lumnaSpin 80s linear infinite}
+#lumna-home .lumna-orb{position:absolute;border-radius:50%;will-change:transform}
+#lumna-home .lumna-orb--1{width:520px;height:520px;left:30%;top:-220px;background:radial-gradient(circle,rgba(255,229,0,.16),rgba(255,229,0,0) 65%);animation:lumnaDrift 24s ease-in-out infinite alternate}
+#lumna-home .lumna-orb--2{width:600px;height:600px;right:-120px;bottom:-320px;background:radial-gradient(circle,rgba(120,150,255,.35),rgba(120,150,255,0) 65%);animation:lumnaDrift 30s ease-in-out infinite alternate-reverse}
+#lumna-home .lumna-hero__inner{position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+#lumna-home .lumna-pills{display:flex;flex-wrap:wrap;gap:10px}
+#lumna-home .lumna-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.02em;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff}
+#lumna-home .lumna-pill b{width:7px;height:7px;border-radius:50%;background:var(--y);box-shadow:0 0 0 4px rgba(255,229,0,.18);animation:lumnaPulse 2s ease-in-out infinite}
+#lumna-home .lumna-tagline{font-family:var(--head);font-size:16px;font-weight:700;color:var(--y)}
+#lumna-home .lumna-pill--y{background:var(--y);color:var(--ink);border-color:var(--y)}
+#lumna-home .lumna-h1{font-family:var(--head);font-weight:800;font-size:clamp(42px,4.6vw,66px);line-height:1.04;letter-spacing:-.04em;margin-top:0;color:#fff}
+#lumna-home .lumna-ml{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+#lumna-home .lumna-ml>span{display:block}
+#lumna-home .lumna-y{color:var(--y);position:relative;display:inline-block}
+#lumna-home .lumna-swoosh{position:absolute;left:0;right:0;bottom:-.12em;width:100%;height:.3em;overflow:visible}
+#lumna-home .lumna-swoosh path{stroke:var(--y);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:0}
+#lumna-home .lumna-hero__lead{font-size:20px;line-height:1.6;color:rgba(255,255,255,.82);margin-top:24px;max-width:470px}
+#lumna-home .lumna-hero__lead strong{color:#fff;font-weight:600}
+#lumna-home .lumna-hero__ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+#lumna-home .lumna-hero__svc{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:40px;font-size:14px;font-weight:500;color:rgba(255,255,255,.75)}
+#lumna-home .lumna-hero__svc a{display:inline-flex;align-items:center;gap:8px;transition:color .25s}
+#lumna-home .lumna-hero__svc a:hover{color:var(--y)}
+#lumna-home .lumna-hero__svc .lumna-ic{width:17px;height:17px;color:var(--y)}
+/* hero visual */
+#lumna-home .lumna-hero__visual{position:relative;perspective:1200px}
+#lumna-home .lumna-tilt{position:relative;transform-style:preserve-3d;transition:transform .5s var(--ease-out);will-change:transform}
+#lumna-home .lumna-hero__photo{aspect-ratio:1/1;border:1px solid rgba(255,255,255,.18);box-shadow:0 50px 120px -40px rgba(0,0,0,.65),0 0 0 10px rgba(255,255,255,.04)}
+#lumna-home .lumna-hero__photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(4,10,85,.45));pointer-events:none}
+#lumna-home .lumna-feed{position:absolute;left:-44px;bottom:38px;width:300px;display:flex;flex-direction:column;gap:10px;z-index:3;transform:translateZ(40px)}
+#lumna-home .lumna-toast{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.96);color:var(--ink);box-shadow:0 22px 44px -18px rgba(0,0,0,.5);animation:lumnaToastIn .6s var(--ease-out) both}
+#lumna-home .lumna-toast.is-out{animation:lumnaToastOut .45s var(--ease) both}
+#lumna-home .lumna-toast__ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--b);color:#fff;flex-shrink:0}
+#lumna-home .lumna-toast__ic--y{background:var(--y);color:var(--ink)}
+#lumna-home .lumna-toast__ic--g{background:#16A34A}
+#lumna-home .lumna-toast__ic--ink{background:var(--ink)}
+#lumna-home .lumna-toast__ic .lumna-ic{width:18px;height:18px}
+#lumna-home .lumna-toast strong{display:block;font-size:13.5px;font-weight:700;line-height:1.3}
+#lumna-home .lumna-toast small{display:block;font-size:12px;color:var(--muted);line-height:1.35}
+#lumna-home .lumna-badge-float{position:absolute;top:30px;right:-26px;z-index:3;transform:translateZ(60px);display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;background:var(--y);color:var(--ink);font-weight:700;font-size:13.5px;box-shadow:0 22px 44px -16px rgba(255,229,0,.55);animation:lumnaBob 6s ease-in-out infinite}
+#lumna-home .lumna-badge-float .lumna-ic{width:18px;height:18px}
+#lumna-home.lumna-js .lumna-load{animation:lumnaFadeUp .8s var(--ease-out) both;animation-delay:calc(var(--d,0)*110ms + 100ms)}
+#lumna-home.lumna-js .lumna-ml>span{animation:lumnaLineUp 1s var(--ease-out) both;animation-delay:calc(var(--d,0)*120ms + 150ms)}
+#lumna-home.lumna-js .lumna-swoosh path{animation:lumnaDraw 1.2s var(--ease-out) .95s both}
+#lumna-home.lumna-js .lumna-load--visual{animation:lumnaRise 1.1s var(--ease-out) .3s both}
+
+/* Marquee bands */
+#lumna-home .lumna-bands{position:relative;height:150px;margin-top:-84px;z-index:5;overflow:hidden;pointer-events:none}
+#lumna-home .lumna-band{position:absolute;left:-5%;width:110%;padding:18px 0;overflow:hidden;white-space:nowrap}
+#lumna-home .lumna-band--back{top:42px;background:var(--ink);transform:rotate(2.2deg);color:rgba(255,255,255,.85)}
+#lumna-home .lumna-band--front{top:40px;background:var(--y);transform:rotate(-2.2deg);color:var(--ink);box-shadow:0 20px 40px -20px rgba(4,10,85,.45)}
+#lumna-home .lumna-band__track{display:inline-flex;gap:0;animation:lumnaMarquee 38s linear infinite}
+#lumna-home .lumna-band--back .lumna-band__track{animation-direction:reverse;animation-duration:46s}
+#lumna-home .lumna-band__track span{display:inline-flex;align-items:center;gap:26px;padding-right:26px;font-family:var(--head);font-weight:800;font-size:22px;letter-spacing:-.01em;text-transform:uppercase}
+#lumna-home .lumna-band__track svg{width:20px;height:20px}
+
+/* =====================================================================
+   ABOUT  (masalah → satu sistem)
+===================================================================== */
+#lumna-home .lumna-about__grid{display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center}
+#lumna-home .lumna-words{font-family:var(--head);font-weight:700;font-size:clamp(21px,2vw,27px);line-height:1.45;letter-spacing:-.015em;color:var(--ink);margin-top:28px}
+#lumna-home.lumna-js .lumna-words .lumna-w{color:rgba(10,15,60,.16);transition:color .35s}
+#lumna-home.lumna-js .lumna-words .lumna-w.is-lit{color:var(--ink)}
+#lumna-home.lumna-js .lumna-words .lumna-w.is-lit.lumna-w--b{color:var(--b)}
+#lumna-home .lumna-points{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px;padding-top:28px;border-top:1px solid var(--line)}
+#lumna-home .lumna-point h3{font-family:var(--head);font-size:18px;font-weight:700;line-height:1.3;color:var(--ink)}
+/* Ikon beranimasi untuk 3 kelebihan */
+#lumna-home .lumna-pv{position:relative;width:64px;height:64px;margin-bottom:16px;border-radius:18px;display:grid;place-items:center;background:var(--tint);border:1px solid var(--line);color:var(--b);overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s var(--ease),background-color .4s}
+#lumna-home .lumna-point:hover .lumna-pv{transform:translateY(-4px) rotate(-3deg);background:#fff;box-shadow:0 16px 30px -18px rgba(4,10,85,.5)}
+#lumna-home .lumna-pv .lumna-ic{position:relative;z-index:1;width:26px;height:26px}
+#lumna-home .lumna-pv__dot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--c);opacity:0;animation:lumnaInto 3s var(--ease) infinite}
+#lumna-home .lumna-pv--follow{background:#FFFBE0;border-color:rgba(242,208,0,.35);color:var(--ink)}
+#lumna-home .lumna-pv__ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+#lumna-home .lumna-pv__ring circle{fill:none;stroke:var(--y-600);stroke-width:3;stroke-linecap:round;stroke-dasharray:164;stroke-dashoffset:164;animation:lumnaRing 3.2s ease-in-out infinite}
+#lumna-home .lumna-pv__badge{position:absolute;z-index:2;top:7px;right:7px;width:17px;height:17px;border-radius:50%;display:grid;place-items:center;background:#16A34A;color:#fff;opacity:0;transform:scale(.4);animation:lumnaBadge 3.2s var(--ease) infinite}
+#lumna-home .lumna-pv__badge svg{width:10px;height:10px}
+#lumna-home .lumna-pv--pipe{background:var(--ink);border-color:transparent}
+#lumna-home .lumna-pv__cols{display:flex;gap:5px;align-items:flex-end;height:30px}
+#lumna-home .lumna-pv__cols i{width:9px;border-radius:3px;background:rgba(255,255,255,.22)}
+#lumna-home .lumna-pv__cols i:nth-child(1){height:14px}
+#lumna-home .lumna-pv__cols i:nth-child(2){height:22px}
+#lumna-home .lumna-pv__cols i:nth-child(3){height:30px;background:rgba(255,229,0,.55)}
+#lumna-home .lumna-pv__lead{position:absolute;left:18px;bottom:12px;width:9px;height:9px;border-radius:50%;background:var(--y);box-shadow:0 0 0 3px rgba(255,229,0,.25);animation:lumnaLead 3.6s var(--ease) infinite}
+@keyframes lumnaInto{0%{opacity:0;transform:translate(0,0) scale(1)}12%{opacity:1}55%{opacity:1;transform:translate(var(--tx),var(--ty)) scale(.5)}70%,100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(.3)}}
+@keyframes lumnaRing{0%{stroke-dashoffset:164}65%,85%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes lumnaBadge{0%,62%{opacity:0;transform:scale(.4)}70%,88%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+@keyframes lumnaLead{0%,15%{transform:translateX(0)}35%,50%{transform:translateX(14px)}70%,88%{transform:translateX(28px);background:var(--y)}100%{transform:translateX(28px);opacity:0}}
+#lumna-home .lumna-point p{font-size:14.5px;color:var(--muted);margin-top:6px;line-height:1.55}
+#lumna-home .lumna-about__visual{position:relative}
+#lumna-home .lumna-about__photo{aspect-ratio:1/1}
+#lumna-home .lumna-ring{position:absolute;inset:-28px;border-radius:40px;border:1.5px dashed rgba(11,27,219,.25);pointer-events:none}
+#lumna-home .lumna-chip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;background:#fff;box-shadow:0 24px 50px -20px rgba(4,10,85,.45);font-size:13.5px;font-weight:700;color:var(--ink)}
+#lumna-home .lumna-chip span{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--b);color:#fff}
+#lumna-home .lumna-chip .lumna-ic{width:17px;height:17px}
+#lumna-home .lumna-about__chip1{left:-34px;bottom:56px;animation:lumnaBob 6.5s ease-in-out infinite}
+#lumna-home .lumna-about__chip2{right:-24px;top:44px;animation:lumnaBob 7.5s ease-in-out 1s infinite}
+#lumna-home .lumna-about__chip2 span{background:var(--y);color:var(--ink)}
+
+/* =====================================================================
+   SOLUTIONS  (sticky stacking cards)
+===================================================================== */
+#lumna-home .lumna-solutions{background:var(--tint)}
+#lumna-home .lumna-stack{display:flex;flex-direction:column;gap:40px}
+/* Kad bertindan: --top dikira oleh JS supaya bahagian bawah kad (butang)
+   sentiasa kelihatan sebelum kad seterusnya menindih. */
+#lumna-home .lumna-scard{position:sticky;top:var(--top,108px);--p:0;transform-origin:center top;transform:scale(calc(1 - var(--p) * .06));will-change:transform}
+#lumna-home .lumna-scard__in{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center;padding:44px;border-radius:36px;background:#fff;border:1px solid var(--line);box-shadow:0 40px 80px -50px rgba(4,10,85,.45);overflow:hidden}
+#lumna-home .lumna-scard__shade{position:absolute;inset:0;background:var(--ink);opacity:calc(var(--p) * .28);pointer-events:none;z-index:4;border-radius:inherit}
+#lumna-home .lumna-scard--flip .lumna-scard__media{order:-1}
+#lumna-home .lumna-scard__label{display:flex;align-items:center;gap:8px;margin-top:22px;font-size:14px;font-weight:700;color:var(--b)}
+#lumna-home .lumna-scard--blue .lumna-scard__label{color:var(--y)}
+#lumna-home .lumna-scard__label .lumna-ic{width:18px;height:18px}
+#lumna-home .lumna-scard--blue .lumna-scard__in{background:linear-gradient(150deg,#0B1BDB 0%,#06108A 100%);color:#fff;border-color:transparent}
+#lumna-home .lumna-scard--y .lumna-scard__in{background:var(--y);border-color:transparent}
+#lumna-home .lumna-scard__num{font-family:var(--head);font-weight:800;font-size:15px;display:inline-flex;align-items:center;gap:12px}
+#lumna-home .lumna-scard__num b{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--b);color:#fff;font-size:15px}
+#lumna-home .lumna-scard--blue .lumna-scard__num b{background:var(--y);color:var(--ink)}
+#lumna-home .lumna-scard--y .lumna-scard__num b{background:var(--ink);color:var(--y)}
+#lumna-home .lumna-scard__cat{font-size:14px;font-weight:600;opacity:.7}
+#lumna-home .lumna-scard h3{font-family:var(--head);font-weight:800;font-size:clamp(26px,2.6vw,38px);line-height:1.12;letter-spacing:-.03em;margin-top:8px}
+#lumna-home .lumna-scard__desc{font-size:17px;line-height:1.65;margin-top:16px;color:var(--muted)}
+#lumna-home .lumna-scard--blue .lumna-scard__desc{color:rgba(255,255,255,.78)}
+#lumna-home .lumna-scard--y .lumna-scard__desc{color:rgba(10,15,60,.72)}
+#lumna-home .lumna-checks{display:grid;gap:12px;margin-top:24px}
+#lumna-home .lumna-checks li{display:flex;align-items:flex-start;gap:12px;font-size:15.5px;font-weight:500;line-height:1.45}
+#lumna-home .lumna-checks span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--tint-2);color:var(--b);flex-shrink:0}
+#lumna-home .lumna-scard--blue .lumna-checks span{background:rgba(255,229,0,.18);color:var(--y)}
+#lumna-home .lumna-scard--y .lumna-checks span{background:var(--ink);color:var(--y)}
+#lumna-home .lumna-checks .lumna-ic{width:14px;height:14px}
+#lumna-home .lumna-scard .lumna-btn{margin-top:32px}
+#lumna-home .lumna-scard__media{position:relative;height:100%;min-height:420px;border-radius:26px;overflow:hidden}
+#lumna-home .lumna-scard__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease-out)}
+#lumna-home .lumna-scard:hover .lumna-scard__media img{transform:scale(1.04)}
+#lumna-home .lumna-scard__tag{position:absolute;left:16px;top:16px;z-index:2;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.92);font-size:12px;font-weight:700;color:var(--ink)}
+/* Claude visual */
+#lumna-home .lumna-claude{position:absolute;inset:0;background:var(--ink);padding:28px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+#lumna-home .lumna-claude .lumna-pin{width:420px;height:420px;right:-140px;bottom:-140px;opacity:.12;animation:lumnaSpin 60s linear infinite}
+#lumna-home .lumna-cwin{position:relative;background:#121845;border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:18px;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+#lumna-home .lumna-cwin__bar{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:16px}
+#lumna-home .lumna-cwin__bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18)}
+#lumna-home .lumna-cwin__bar em{margin-left:auto;font-style:normal;color:var(--y);font-size:12px;font-weight:600}
+#lumna-home .lumna-cmsg{max-width:85%;margin-left:auto;padding:12px 14px;border-radius:16px 16px 4px 16px;background:var(--b);color:#fff;font-size:13.5px;line-height:1.5}
+#lumna-home .lumna-creply{margin-top:14px;padding:14px;border-radius:16px 16px 16px 4px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+#lumna-home .lumna-creply__h{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--y);margin-bottom:10px}
+#lumna-home .lumna-creply__h .lumna-ic{width:15px;height:15px}
+#lumna-home .lumna-cl{display:block;height:8px;border-radius:6px;background:rgba(255,255,255,.18);margin-top:9px;transform-origin:left;animation:lumnaWrite 6s var(--ease-out) infinite both}
+#lumna-home .lumna-cl:nth-child(2){width:100%}
+#lumna-home .lumna-cl:nth-child(3){width:88%;animation-delay:.3s}
+#lumna-home .lumna-cl:nth-child(4){width:94%;animation-delay:.6s}
+#lumna-home .lumna-cl:nth-child(5){width:60%;animation-delay:.9s;background:rgba(255,229,0,.5)}
+#lumna-home .lumna-cskills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+#lumna-home .lumna-cskills span{padding:8px 12px;border-radius:999px;font-size:12px;font-weight:600;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);animation:lumnaSkill 6s ease-in-out infinite}
+#lumna-home .lumna-cskills span:nth-child(2){animation-delay:2s}
+#lumna-home .lumna-cskills span:nth-child(3){animation-delay:4s}
+
+/* =====================================================================
+   OUR WORK  (dashboard + hotspots)
+===================================================================== */
+#lumna-home .lumna-work__grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
+#lumna-home .lumna-work__photo{aspect-ratio:1/1}
+#lumna-home .lumna-hot{position:absolute;z-index:2;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;display:grid;place-items:center;background:var(--y);color:var(--ink);font-family:var(--head);font-weight:800;font-size:14px;box-shadow:0 8px 20px -6px rgba(0,0,0,.45);transition:transform .35s var(--ease),background-color .3s,color .3s;cursor:default}
+#lumna-home .lumna-hot::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--y);animation:lumnaRipple 2.2s ease-out infinite}
+#lumna-home .lumna-hot.is-on{transform:scale(1.25);background:var(--b);color:#fff}
+#lumna-home .lumna-hot.is-on::before{border-color:var(--b)}
+#lumna-home .lumna-legend{display:grid;gap:12px;margin-top:32px}
+#lumna-home .lumna-legend li{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;border-radius:20px;border:1px solid var(--line);background:#fff;transition:border-color .3s,box-shadow .3s,transform .35s var(--ease),background-color .3s;cursor:default}
+#lumna-home .lumna-legend li.is-on{border-color:rgba(11,27,219,.35);box-shadow:0 22px 40px -28px rgba(4,10,85,.5);transform:translateX(6px);background:var(--tint)}
+#lumna-home .lumna-legend b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--y);color:var(--ink);font-family:var(--head);font-weight:800;font-size:14px;flex-shrink:0;transition:background-color .3s,color .3s}
+#lumna-home .lumna-legend li.is-on b{background:var(--b);color:#fff}
+#lumna-home .lumna-legend h3{font-family:var(--head);font-size:17px;font-weight:700;line-height:1.3}
+#lumna-home .lumna-legend p{font-size:14.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+#lumna-home .lumna-work__ctas{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:32px}
+#lumna-home .lumna-work__note{font-size:13px;color:var(--muted)}
+
+/* =====================================================================
+   PROCESS
+===================================================================== */
+#lumna-home .lumna-process{background:linear-gradient(170deg,#06108A 0%,#040A55 100%);color:#fff;overflow:hidden}
+#lumna-home .lumna-process .lumna-pin{width:620px;height:620px;left:-240px;bottom:-260px;opacity:.06;animation:lumnaSpin 90s linear infinite reverse}
+#lumna-home .lumna-process .lumna-eyebrow{color:var(--y)}
+#lumna-home .lumna-process .lumna-h2{color:#fff}
+#lumna-home .lumna-process .lumna-lead{color:rgba(255,255,255,.72)}
+#lumna-home .lumna-process__h span{display:block}
+#lumna-home .lumna-process__y{position:relative;display:inline-block!important;margin-top:10px;padding:4px 18px 8px;border-radius:16px;background:var(--y);color:var(--ink);font-size:.78em;transform:rotate(-1.5deg)}
+#lumna-home .lumna-steps{position:relative}
+#lumna-home .lumna-steps__track{position:absolute;top:34px;left:12.5%;right:12.5%;height:2px;background:rgba(255,255,255,.14);border-radius:2px;overflow:hidden}
+#lumna-home .lumna-steps__fill{position:absolute;inset:0;background:linear-gradient(90deg,var(--y),#FFF5A0);transform-origin:left;transition:transform 1.8s cubic-bezier(.45,.05,.25,1) .2s}
+#lumna-home .lumna-steps ol{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+#lumna-home .lumna-step{text-align:center;padding:0 10px;transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(.25s + var(--i)*.4s)}
+#lumna-home .lumna-step__node{width:68px;height:68px;margin:0 auto;border-radius:22px;display:grid;place-items:center;background:var(--y);color:var(--ink);box-shadow:0 0 0 8px rgba(255,229,0,.12),0 18px 36px -14px rgba(255,229,0,.6);transition:background-color .5s,color .5s,box-shadow .5s,transform .5s var(--ease);transition-delay:calc(.4s + var(--i)*.4s)}
+#lumna-home .lumna-step__node .lumna-ic{width:26px;height:26px}
+#lumna-home .lumna-step:hover .lumna-step__node{transform:translateY(-4px) rotate(-6deg)}
+#lumna-home .lumna-step__num{display:block;font-family:var(--head);font-weight:700;font-size:15px;color:var(--y);margin-top:26px}
+#lumna-home .lumna-step h3{font-family:var(--head);font-size:21px;font-weight:700;margin-top:6px}
+#lumna-home .lumna-step p{font-size:15px;color:rgba(255,255,255,.7);margin-top:8px;line-height:1.55}
+#lumna-home.lumna-js .lumna-steps:not(.is-in) .lumna-steps__fill{transform:scaleX(0)}
+#lumna-home.lumna-js .lumna-steps:not(.is-in) .lumna-step{opacity:.2;transform:translateY(18px)}
+#lumna-home.lumna-js .lumna-steps:not(.is-in) .lumna-step__node{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);box-shadow:0 0 0 8px rgba(255,255,255,.03)}
+
+/* =====================================================================
+   TESTIMONI
+===================================================================== */
+#lumna-home .lumna-logos{position:relative;margin:0 auto 72px;max-width:1100px}
+#lumna-home .lumna-logos__label{text-align:center;font-size:15px;font-weight:600;color:var(--muted);margin-bottom:22px}
+#lumna-home .lumna-marq{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+#lumna-home .lumna-marq__track{display:flex;width:max-content;animation:lumnaMarquee var(--dur,40s) linear infinite}
+#lumna-home .lumna-marq--rev .lumna-marq__track{animation-direction:reverse}
+#lumna-home .lumna-marq:hover .lumna-marq__track{animation-play-state:paused}
+#lumna-home .lumna-logo-item{display:flex;align-items:center;justify-content:center;height:64px;min-width:180px;margin-right:18px;padding:0 26px;border-radius:16px;border:1px dashed var(--line-2);background:#fff;color:#9AA1C0;font-family:var(--head);font-weight:700;font-size:15px;letter-spacing:-.01em;filter:grayscale(1);transition:filter .3s,border-color .3s,color .3s}
+#lumna-home .lumna-logo-item:hover{filter:none;border-color:var(--b);color:var(--b)}
+#lumna-home .lumna-logo-item.has-img{width:200px;min-width:0;height:96px;padding:0 18px;border-style:solid;border-color:var(--line);filter:none;box-shadow:0 10px 24px -20px rgba(4,10,85,.4);transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+#lumna-home .lumna-logo-item.has-img:hover{transform:translateY(-4px);border-color:rgba(11,27,219,.3);box-shadow:0 18px 32px -20px rgba(4,10,85,.45)}
+#lumna-home .lumna-logo-item img{display:block;max-width:100%;max-height:64px;object-fit:contain;border-radius:6px}
+#lumna-home .lumna-marq--tm{padding:10px 0 24px}
+#lumna-home .lumna-marq--tm .lumna-marq__track{align-items:stretch}
+#lumna-home .lumna-tm__hint{text-align:center;font-size:12.5px;color:var(--muted);margin-top:4px}
+#lumna-home .lumna-tcard__av{flex-shrink:0;box-shadow:0 0 0 3px #fff,0 6px 14px -6px rgba(4,10,85,.4)}
+#lumna-home img.lumna-tcard__av{width:52px;height:52px;border-radius:50%}
+#lumna-home .lumna-tlink{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:14px;padding:9px 14px;border-radius:999px;background:var(--b);color:#fff;font-size:13px;font-weight:700;transition:transform .3s var(--ease),box-shadow .3s}
+#lumna-home .lumna-tlink svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+#lumna-home .lumna-tlink:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(11,27,219,.7)}
+#lumna-home .lumna-tlink:hover svg{transform:translateX(3px)}
+#lumna-home .lumna-tcard:nth-child(3n+2) .lumna-tlink{background:var(--y);color:var(--ink)}
+#lumna-home .lumna-tcard:nth-child(3n+3) .lumna-tlink{background:var(--ink);color:var(--y)}
+/* Result Sebelum → Selepas (cip kecil) */
+#lumna-home .lumna-tres{margin-top:14px}
+#lumna-home .lumna-tres__t{font-size:12px;font-weight:600;opacity:.7;margin-bottom:6px}
+#lumna-home .lumna-tres__grid{display:flex;align-items:center;gap:6px}
+#lumna-home .lumna-tres__cell{flex:1;min-width:0;padding:8px 10px;border-radius:12px;background:var(--tint)}
+#lumna-home .lumna-tres__cell span{display:block;font-size:10.5px;font-weight:600;opacity:.7;line-height:1.2}
+#lumna-home .lumna-tres__cell b{display:block;font-family:var(--head);font-weight:800;font-size:15px;line-height:1.25;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#lumna-home .lumna-tres__cell.is-key{background:var(--b);color:#fff}
+#lumna-home .lumna-tres__arr{width:14px;height:14px;flex-shrink:0;opacity:.55}
+#lumna-home .lumna-tcard:nth-child(3n+2) .lumna-tres__cell{background:rgba(255,255,255,.12)}
+#lumna-home .lumna-tcard:nth-child(3n+2) .lumna-tres__cell.is-key{background:var(--y);color:var(--ink)}
+#lumna-home .lumna-tcard:nth-child(3n+3) .lumna-tres__cell{background:rgba(255,255,255,.6)}
+#lumna-home .lumna-tcard:nth-child(3n+3) .lumna-tres__cell.is-key{background:var(--ink);color:var(--y)}
+#lumna-home img.lumna-tcard__av{object-fit:cover;padding:0}
+#lumna-home .lumna-tcard{position:relative;width:400px;margin-right:22px;padding:28px;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:0 24px 50px -36px rgba(4,10,85,.4);display:flex;flex-direction:column;white-space:normal;transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
+#lumna-home .lumna-tcard:hover{transform:translateY(-6px);border-color:rgba(11,27,219,.3);box-shadow:0 34px 60px -36px rgba(4,10,85,.55)}
+#lumna-home .lumna-tcard:nth-child(3n+2){background:var(--b);color:#fff;border-color:transparent}
+#lumna-home .lumna-tcard:nth-child(3n+3){background:var(--y);border-color:transparent}
+#lumna-home .lumna-tcard__top{display:flex;align-items:center;justify-content:space-between}
+#lumna-home .lumna-stars{display:flex;gap:3px;color:var(--y-600)}
+#lumna-home .lumna-tcard:nth-child(3n+2) .lumna-stars{color:var(--y)}
+#lumna-home .lumna-tcard:nth-child(3n+3) .lumna-stars{color:var(--ink)}
+#lumna-home .lumna-stars svg{width:16px;height:16px}
+#lumna-home .lumna-tcard__tag{font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--tint);color:var(--b)}
+#lumna-home .lumna-tcard:nth-child(3n+2) .lumna-tcard__tag{background:rgba(255,255,255,.14);color:#fff}
+#lumna-home .lumna-tcard:nth-child(3n+3) .lumna-tcard__tag{background:var(--ink);color:var(--y)}
+#lumna-home .lumna-tcard blockquote{font-size:16px;line-height:1.6;font-weight:500;margin-top:18px;flex:1}
+#lumna-home .lumna-tcard__img{margin-top:16px;border-radius:14px;max-height:220px;width:100%;object-fit:cover}
+#lumna-home .lumna-tcard__who{display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(10,15,60,.1)}
+#lumna-home .lumna-tcard:nth-child(3n+2) .lumna-tcard__who{border-color:rgba(255,255,255,.16)}
+#lumna-home .lumna-tcard__av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--tint-2);color:var(--b);font-weight:800;font-family:var(--head)}
+/* Kad testimoni kompak */
+#lumna-home .lumna-marq--tm .lumna-tcard{width:300px;margin-right:16px;padding:20px;border-radius:22px}
+#lumna-home .lumna-marq--tm .lumna-tcard__who{margin:0 0 12px;padding:0;border:0}
+#lumna-home .lumna-marq--tm img.lumna-tcard__av{width:44px;height:44px}
+#lumna-home .lumna-marq--tm .lumna-tcard__who strong{font-size:14.5px}
+#lumna-home .lumna-marq--tm .lumna-tcard__who small{font-size:12px}
+#lumna-home .lumna-marq--tm .lumna-stars svg{width:13px;height:13px}
+#lumna-home .lumna-marq--tm .lumna-tcard__tag{font-size:10.5px;padding:4px 9px}
+#lumna-home .lumna-marq--tm .lumna-tcard blockquote{font-size:14.5px;line-height:1.55;margin-top:10px}
+#lumna-home .lumna-tcard__who strong{display:block;font-size:14.5px;font-weight:700;line-height:1.3}
+#lumna-home .lumna-tcard__who small{display:block;font-size:12.5px;opacity:.7}
+
+/* =====================================================================
+   CTA
+===================================================================== */
+#lumna-home .lumna-cta-wrap{padding:0 0 128px}
+#lumna-home .lumna-cta{position:relative;overflow:hidden;border-radius:44px;padding:96px 64px;text-align:center;color:#fff;background:radial-gradient(700px 400px at 50% -20%,rgba(80,110,255,.9),rgba(80,110,255,0) 70%),linear-gradient(160deg,#0B1BDB 0%,#06108A 60%,#040A55 100%)}
+#lumna-home .lumna-cta .lumna-pin{width:560px;height:560px;left:50%;top:50%;margin:-280px 0 0 -280px;opacity:.08;animation:lumnaSpin 70s linear infinite}
+#lumna-home .lumna-cta__in{position:relative;max-width:780px;margin:0 auto}
+#lumna-home .lumna-cta .lumna-eyebrow{color:var(--y)}
+#lumna-home .lumna-cta h2{font-family:var(--head);font-weight:800;font-size:clamp(34px,4.6vw,62px);line-height:1.04;letter-spacing:-.04em;margin-top:20px}
+#lumna-home .lumna-cta p{font-size:18.5px;line-height:1.65;color:rgba(255,255,255,.78);margin:22px auto 0;max-width:600px}
+#lumna-home .lumna-cta__btns{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:40px}
+#lumna-home .lumna-cta__svc{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px}
+#lumna-home .lumna-cta__svc a{padding:9px 16px;border-radius:999px;font-size:13.5px;font-weight:600;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);transition:background-color .3s,color .3s,border-color .3s}
+#lumna-home .lumna-cta__svc a:hover{background:var(--y);color:var(--ink);border-color:var(--y)}
+
+/* =====================================================================
+   FOOTER
+===================================================================== */
+#lumna-home .lumna-footer{background:#050A3A;color:rgba(255,255,255,.7);padding:80px 0 0;font-size:14.5px}
+#lumna-home .lumna-footer__grid{display:grid;grid-template-columns:1.6fr 1fr 1.2fr;gap:56px;padding-bottom:56px}
+#lumna-home .lumna-footer .lumna-logo img{height:60px}
+#lumna-home .lumna-footer__desc{margin-top:20px;max-width:380px;line-height:1.7}
+#lumna-home .lumna-footer h4{font-family:var(--head);font-size:16px;font-weight:700;color:#fff;margin-bottom:18px}
+#lumna-home .lumna-footer__links li+li{margin-top:11px}
+#lumna-home .lumna-footer__links a{transition:color .2s,padding-left .3s var(--ease)}
+#lumna-home .lumna-footer__links a:hover{color:#fff;padding-left:6px}
+#lumna-home .lumna-footer__contact li{display:flex;gap:12px;align-items:flex-start}
+#lumna-home .lumna-footer__contact li+li{margin-top:13px}
+#lumna-home .lumna-footer__contact .lumna-ic{width:18px;height:18px;color:var(--y);margin-top:2px}
+#lumna-home .lumna-footer__bottom{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:24px 0 30px;border-top:1px solid rgba(255,255,255,.1);font-size:13.5px;text-align:center}
+#lumna-home .lumna-footer__contact a{transition:color .2s}
+#lumna-home .lumna-footer__contact a:hover{color:#fff}
+#lumna-home .lumna-wa{display:inline-flex;align-items:center;gap:10px;margin-top:22px;height:50px;padding:0 22px 0 8px;border-radius:999px;background:#25D366;color:#06301A;font-weight:700;font-size:15px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+#lumna-home .lumna-wa:hover{transform:translateY(-3px);box-shadow:0 16px 30px -14px rgba(37,211,102,.7)}
+#lumna-home .lumna-wa__ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#128C4A}
+#lumna-home .lumna-wa__ic .lumna-ic{width:18px;height:18px}
+#lumna-home .lumna-footer__bottom a:hover{color:#fff}
+
+/* =====================================================================
+   ANIMATION CSS
+===================================================================== */
+#lumna-home.lumna-js .lumna-reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease-out),transform .9s var(--ease-out);transition-delay:calc(var(--i,0)*110ms)}
+#lumna-home.lumna-js .lumna-reveal--l{transform:translateX(-40px)}
+#lumna-home.lumna-js .lumna-reveal--r{transform:translateX(40px)}
+#lumna-home.lumna-js .lumna-reveal--zoom{transform:scale(.92)}
+#lumna-home.lumna-js .lumna-reveal.is-in{opacity:1;transform:none}
+#lumna-home.lumna-js .lumna-photo.lumna-reveal img{transform:scale(1.12)}
+#lumna-home.lumna-js .lumna-photo.lumna-reveal.is-in img{transform:scale(1)}
+#lumna-home.lumna-js .lumna-reveal.is-in .lumna-photo img{transform:scale(1)}
+#lumna-home.lumna-js [data-lumna-play]:not(.is-playing),#lumna-home.lumna-js [data-lumna-play]:not(.is-playing) *{animation-play-state:paused!important}
+
+@keyframes lumnaFadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes lumnaLineUp{from{transform:translateY(105%)}to{transform:none}}
+@keyframes lumnaRise{from{opacity:0;transform:translateY(60px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes lumnaDraw{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
+@keyframes lumnaSpin{to{transform:rotate(360deg)}}
+@keyframes lumnaDrift{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-80px,60px,0)}}
+@keyframes lumnaBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes lumnaPulse{0%,100%{box-shadow:0 0 0 4px rgba(255,229,0,.18)}50%{box-shadow:0 0 0 8px rgba(255,229,0,0)}}
+@keyframes lumnaMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes lumnaToastIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes lumnaToastOut{to{opacity:0;transform:translateY(-10px) scale(.96)}}
+@keyframes lumnaWrite{0%{transform:scaleX(0)}25%,88%{transform:scaleX(1);opacity:1}96%,100%{transform:scaleX(1);opacity:0}}
+@keyframes lumnaSkill{0%,22%,100%{background:rgba(255,255,255,.08);color:#fff}6%,16%{background:var(--y);color:var(--ink)}}
+@keyframes lumnaRipple{0%{transform:scale(.7);opacity:.9}100%{transform:scale(1.6);opacity:0}}
+
+/* =====================================================================
+   RESPONSIVE
+===================================================================== */
+@media (max-width:1100px){
+  #lumna-home .lumna-hero__inner{grid-template-columns:1fr;gap:72px}
+  #lumna-home .lumna-hero__copy{text-align:center;max-width:760px;margin:0 auto}
+  #lumna-home .lumna-pills,#lumna-home .lumna-hero__ctas,#lumna-home .lumna-hero__svc{justify-content:center}
+  #lumna-home .lumna-hero__lead{margin-left:auto;margin-right:auto}
+  #lumna-home .lumna-hero__visual{max-width:600px;width:100%;margin:0 auto}
+  #lumna-home .lumna-feed{left:-20px}
+  #lumna-home .lumna-badge-float{right:-12px}
+  #lumna-home .lumna-about__grid,#lumna-home .lumna-work__grid{grid-template-columns:1fr;gap:64px}
+  #lumna-home .lumna-about__visual,#lumna-home .lumna-work__visual{max-width:600px;width:100%;margin:0 auto}
+  #lumna-home .lumna-scard__in{grid-template-columns:1fr;gap:32px;padding:36px}
+  #lumna-home .lumna-scard--flip .lumna-scard__media{order:0}
+  #lumna-home .lumna-scard__media{min-height:380px}
+  #lumna-home .lumna-footer__grid{grid-template-columns:1fr 1fr}
+  #lumna-home .lumna-footer__brand{grid-column:1 / -1}}
+@media (max-width:960px){
+  #lumna-home .lumna-nav__inner{height:68px;gap:12px}
+  #lumna-home .lumna-logo img{height:42px}
+  #lumna-home .lumna-nav__menu{gap:0}
+  #lumna-home .lumna-nav__link{padding:9px 12px;font-size:14px}
+  #lumna-home .lumna-nav__cta{height:42px;padding:0 16px;font-size:13.5px}
+  #lumna-home .lumna-scard{position:relative;top:auto!important;transform:none!important}
+  #lumna-home .lumna-scard__shade{display:none}
+  #lumna-home .lumna-stack{gap:24px}
+}
+@media (max-width:767px){
+  #lumna-home .lumna-container{padding:0 20px}
+  #lumna-home .lumna-section{padding:88px 0}
+  #lumna-home .lumna-head{margin-bottom:44px}
+  #lumna-home .lumna-lead,#lumna-home .lumna-hero__lead,#lumna-home .lumna-cta p{font-size:16.5px}
+  #lumna-home .lumna-hero{padding:56px 0 130px}
+  #lumna-home .lumna-h1{font-size:clamp(30px,8.6vw,46px);line-height:1.08}
+  #lumna-home .lumna-hero__ctas .lumna-btn{flex:1 1 100%}
+  #lumna-home .lumna-process__y{font-size:.66em;padding:4px 14px 7px;border-radius:12px}
+  #lumna-home .lumna-hero .lumna-pin{width:460px;height:460px;right:-200px;top:-120px}
+  #lumna-home .lumna-orb--1{display:none}
+  #lumna-home .lumna-feed{left:12px;right:12px;bottom:12px;width:auto}
+  #lumna-home .lumna-feed .lumna-toast:nth-child(n+3){display:none}
+  #lumna-home .lumna-toast{padding:10px 12px}
+  #lumna-home .lumna-badge-float{top:14px;right:12px;padding:9px 12px;font-size:12px}
+  #lumna-home .lumna-bands{height:120px;margin-top:-70px}
+  #lumna-home .lumna-band{padding:13px 0}
+  #lumna-home .lumna-band__track span{font-size:16px;gap:18px;padding-right:18px}
+  #lumna-home .lumna-points{grid-template-columns:1fr;gap:20px}
+  #lumna-home .lumna-point{display:grid;grid-template-columns:56px 1fr;column-gap:16px;align-items:start}
+  #lumna-home .lumna-point .lumna-pv{grid-row:span 2;width:56px;height:56px;margin:0;border-radius:16px}
+  #lumna-home .lumna-point p{margin-top:2px}
+  #lumna-home .lumna-ring{inset:-12px;border-radius:34px}
+  #lumna-home .lumna-about__chip1{left:10px;bottom:14px}
+  #lumna-home .lumna-about__chip2{right:10px;top:14px}
+  #lumna-home .lumna-chip{padding:9px 12px;font-size:12px}
+  #lumna-home .lumna-scard__in{padding:22px;border-radius:28px}
+  #lumna-home .lumna-scard__media{min-height:300px;border-radius:20px}
+  #lumna-home .lumna-scard .lumna-btn{width:100%}
+  #lumna-home .lumna-claude{padding:16px}
+  #lumna-home .lumna-steps__track{top:34px;bottom:34px;left:33px;right:auto;width:2px;height:auto}
+  #lumna-home .lumna-steps__fill{transform-origin:top;background:linear-gradient(180deg,var(--y),#FFF5A0)}
+  #lumna-home.lumna-js .lumna-steps:not(.is-in) .lumna-steps__fill{transform:scaleY(0)}
+  #lumna-home .lumna-steps ol{grid-template-columns:1fr;gap:36px}
+  #lumna-home .lumna-step{position:relative;text-align:left;padding:0 0 0 92px;min-height:68px;transition-delay:calc(.15s + var(--i)*.25s)}
+  #lumna-home .lumna-step__node{position:absolute;left:0;top:0;margin:0;transition-delay:calc(.25s + var(--i)*.25s)}
+  #lumna-home .lumna-step__num{margin-top:4px}
+  #lumna-home .lumna-tcard{width:300px;padding:22px}
+  #lumna-home .lumna-marq--tm .lumna-tcard{width:270px;padding:18px;margin-right:12px}
+  #lumna-home .lumna-logo-item{min-width:150px;height:56px}
+  #lumna-home .lumna-logo-item.has-img{width:160px;height:78px;margin-right:12px;padding:0 14px}
+  #lumna-home .lumna-cta-wrap{padding-bottom:88px}
+  #lumna-home .lumna-cta{padding:64px 22px;border-radius:30px}
+  #lumna-home .lumna-cta__btns .lumna-btn{flex:1 1 100%}
+  #lumna-home .lumna-footer__grid{grid-template-columns:1fr;gap:36px}
+  #lumna-home .lumna-footer__bottom{flex-direction:column}
+}
+
+/* Telefon: menu kekal di luar, label dipendekkan, submenu selebar skrin */
+@media (max-width:680px){
+  #lumna-home .lumna-nav .lumna-container{padding:0 12px}
+  #lumna-home .lumna-nav__inner{position:relative;height:62px;gap:6px}
+  #lumna-home .lumna-logo img{height:34px}
+  #lumna-home .lumna-nav__home{display:none}
+  #lumna-home .lumna-nav__menu{margin-left:auto}
+  #lumna-home .lumna-nav__cta{width:40px;height:40px;padding:0;flex-shrink:0}
+  #lumna-home .lumna-nav__cta .lumna-cta-txt{display:none}
+  #lumna-home .lumna-nav__cta .lumna-cta-ic{display:block}
+  #lumna-home .lumna-nav__cta:hover .lumna-ic{transform:none}
+  #lumna-home .lumna-nav__link{padding:8px 7px;font-size:13px;gap:3px}
+  #lumna-home .lumna-nav__inner{gap:2px}
+  #lumna-home .lumna-logo{margin-right:auto}
+  #lumna-home .lumna-logo img{height:32px}
+  #lumna-home .lumna-nav__link .lumna-ic{width:14px;height:14px}
+  #lumna-home .lumna-lbl-long{display:none}
+  #lumna-home .lumna-dd{position:static}
+  #lumna-home .lumna-dd__panel{left:8px;right:8px;top:calc(100% + 4px);min-width:0;transform:translateY(-10px)}
+  #lumna-home .lumna-dd.is-open .lumna-dd__panel{transform:none}
+  #lumna-home .lumna-dd__go{opacity:1;transform:none}
+}
+@media (min-width:681px){
+  #lumna-home .lumna-lbl-short{display:none}
+}
+
+/* =====================================================================
+   REDUCED MOTION
+===================================================================== */
+@media (prefers-reduced-motion:reduce){
+  #lumna-home *,#lumna-home *::before,#lumna-home *::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  #lumna-home.lumna-js .lumna-reveal{opacity:1;transform:none}
+  #lumna-home.lumna-js .lumna-words .lumna-w{color:var(--ink)}
+  #lumna-home .lumna-marq,#lumna-home .lumna-band{overflow-x:auto}
+}
+</style>
+
+<!-- ICON SPRITE -->
+<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <symbol id="lumna-pinwheel" viewBox="0 0 200 200"><g fill="currentColor">
+    <polygon points="70,12 92,34 92,84 70,62"/><polygon points="70,12 92,34 92,84 70,62" transform="rotate(45 100 100)"/><polygon points="70,12 92,34 92,84 70,62" transform="rotate(90 100 100)"/><polygon points="70,12 92,34 92,84 70,62" transform="rotate(135 100 100)"/><polygon points="70,12 92,34 92,84 70,62" transform="rotate(180 100 100)"/><polygon points="70,12 92,34 92,84 70,62" transform="rotate(225 100 100)"/><polygon points="70,12 92,34 92,84 70,62" transform="rotate(270 100 100)"/><polygon points="70,12 92,34 92,84 70,62" transform="rotate(315 100 100)"/>
+  </g></symbol>
+  <symbol id="lumna-i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol>
+  <symbol id="lumna-i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="lumna-i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+  <symbol id="lumna-i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+  <symbol id="lumna-i-msg" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4"/></symbol>
+  <symbol id="lumna-i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></symbol>
+  <symbol id="lumna-i-kanban" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 7v7M12 7v4M16 7v9"/></symbol>
+  <symbol id="lumna-i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+  <symbol id="lumna-i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.7 4H7.3a2 2 0 0 0-1.8 1.1z"/></symbol>
+  <symbol id="lumna-i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="lumna-i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 6-6"/></symbol>
+  <symbol id="lumna-i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></symbol>
+  <symbol id="lumna-i-task" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+  <symbol id="lumna-i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="lumna-i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z"/></symbol>
+  <symbol id="lumna-i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></symbol>
+  <symbol id="lumna-i-rocket" viewBox="0 0 24 24"><path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2"/><path d="M9 12a13 13 0 0 1 11-9c0 4-2.5 8-9 12z"/><path d="M9 12H5l2-4h4M12 15v4l4-2v-4"/></symbol>
+  <symbol id="lumna-i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="lumna-i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+  <symbol id="lumna-i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="lumna-i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+</svg>
+
+<div id="lumna-home" lang="ms">
+<script>
+(function(){var r=document.getElementById('lumna-home');if(!r)return;r.classList.add('lumna-js');
+setTimeout(function(){if(!window.__lumnaHomeInit){r.classList.remove('lumna-js');}},3000);})();
+</script>
+
+<!-- =====================================================================
+  NAVIGATION  (pautan terus, tiada dropdown)
+====================================================================== -->
+<header class="lumna-nav" data-lumna-nav>
+  <div class="lumna-container lumna-nav__inner">
+    <a class="lumna-logo" href="#" data-lumna-link="home" aria-label="LumnaTech, Laman Utama">
+      <img data-lumna-img="logo" alt="LumnaTech: Automate Your Business Operation" width="146" height="48">
+    </a>
+    <nav class="lumna-nav__menu" aria-label="Menu utama">
+      <a class="lumna-nav__link lumna-nav__home" href="#" data-lumna-link="home">Home</a>
+
+      <div class="lumna-dd">
+        <button type="button" class="lumna-nav__link" aria-expanded="false" aria-haspopup="true" data-lumna-dd>
+          Training
+          <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-chev"/></svg>
+        </button>
+        <div class="lumna-dd__panel">
+          <p class="lumna-dd__label">AI Training</p>
+          <a class="lumna-dd__item" href="#" data-lumna-link="claude">
+            <span class="lumna-dd__icon lumna-dd__icon--y"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-cap"/></svg></span>
+            <span class="lumna-dd__txt"><strong>Claude AI Class</strong><small>Belajar guna AI untuk kerja harian</small></span>
+            <svg class="lumna-dd__go" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="lumna-dd">
+        <button type="button" class="lumna-nav__link" aria-expanded="false" aria-haspopup="true" data-lumna-dd>
+          <span class="lumna-lbl-long">Done For Your Service</span><span class="lumna-lbl-short">Done For You</span>
+          <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-chev"/></svg>
+        </button>
+        <div class="lumna-dd__panel">
+          <p class="lumna-dd__label">Kami Setup Untuk Anda</p>
+          <a class="lumna-dd__item" href="#" data-lumna-link="chatbot">
+            <span class="lumna-dd__icon"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-msg"/></svg></span>
+            <span class="lumna-dd__txt"><strong>Setup AI Chatbot</strong><small>AI bantu jawab pertanyaan customer</small></span>
+            <svg class="lumna-dd__go" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg>
+          </a>
+          <a class="lumna-dd__item" href="#" data-lumna-link="crm">
+            <span class="lumna-dd__icon"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-kanban"/></svg></span>
+            <span class="lumna-dd__txt"><strong>Setup CRM</strong><small>Urus customer &amp; sales dalam satu sistem</small></span>
+            <svg class="lumna-dd__go" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="lumna-nav__right">
+      <a class="lumna-btn lumna-btn--b lumna-nav__cta" href="#" data-lumna-link="contact" aria-label="Contact Us"><span class="lumna-cta-txt">Contact Us</span><svg class="lumna-ic lumna-cta-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-msg"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<!-- =====================================================================
+  HERO
+====================================================================== -->
+<section class="lumna-hero" id="lumna-top">
+  <div class="lumna-hero__bg" aria-hidden="true" data-lumna-play>
+
+    <span class="lumna-orb lumna-orb--1"></span>
+    <span class="lumna-orb lumna-orb--2"></span>
+    <svg class="lumna-pin"><use href="#lumna-pinwheel"/></svg>
+  </div>
+
+  <div class="lumna-container lumna-hero__inner">
+    <div class="lumna-hero__copy">
+      <h1 class="lumna-h1">
+        <span class="lumna-ml"><span style="--d:1">Bisnes Lebih</span></span>
+        <span class="lumna-ml"><span style="--d:2">Tersusun,</span></span>
+        <span class="lumna-ml"><span style="--d:3"><span class="lumna-y">Kerja Lebih Mudah.<svg class="lumna-swoosh" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 14 C 80 4, 200 2, 296 10"/></svg></span></span></span>
+      </h1>
+      <p class="lumna-hero__lead lumna-load" style="--d:5">Daripada setup <strong>CRM &amp; AI Chatbot</strong> hingga latihan <strong>Claude AI</strong> untuk team anda.</p>
+      <div class="lumna-hero__ctas lumna-load" style="--d:6">
+        <a class="lumna-btn lumna-btn--y" href="#lumna-solutions" data-lumna-scroll>Lihat Solusi Kami <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg></a>
+        <a class="lumna-btn lumna-btn--line" href="#" data-lumna-link="contact">Hubungi Kami</a>
+      </div>
+    </div>
+
+    <div class="lumna-hero__visual lumna-load--visual" data-lumna-tilt>
+      <div class="lumna-tilt">
+        <div class="lumna-photo lumna-hero__photo">
+          <img data-lumna-img="hero" alt="Usahawan menunjukkan dashboard CRM yang disetup LumnaTech" width="1254" height="1254" fetchpriority="high">
+        </div>
+        <div class="lumna-badge-float" aria-hidden="true">
+          <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#lumna-i-bolt"/></svg>
+          Automasi aktif
+        </div>
+        <div class="lumna-feed" data-lumna-feed aria-hidden="true">
+          <div class="lumna-toast"><span class="lumna-toast__ic lumna-toast__ic--g"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#lumna-i-msg"/></svg></span><div><strong>Lead baru dari WhatsApp</strong><small>Terus masuk ke CRM</small></div></div>
+          <div class="lumna-toast"><span class="lumna-toast__ic"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#lumna-i-spark"/></svg></span><div><strong>AI Chatbot dah balas</strong><small>Soalan customer dijawab</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee bands -->
+<div class="lumna-bands" aria-hidden="true" data-lumna-play>
+  <div class="lumna-band lumna-band--back"><div class="lumna-band__track">
+    <span>WhatsApp <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> Facebook <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> Instagram <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> TikTok <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> Website <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> Satu Dashboard <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg></span>
+    <span>WhatsApp <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> Facebook <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> Instagram <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> TikTok <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> Website <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg> Satu Dashboard <svg style="color:#FFE500"><use href="#lumna-pinwheel"/></svg></span>
+  </div></div>
+  <div class="lumna-band lumna-band--front"><div class="lumna-band__track">
+    <span>Setup CRM <svg style="color:#0B1BDB"><use href="#lumna-pinwheel"/></svg> AI Chatbot <svg style="color:#0B1BDB"><use href="#lumna-pinwheel"/></svg> Claude AI Class <svg style="color:#0B1BDB"><use href="#lumna-pinwheel"/></svg> Automate Your Business Operation <svg style="color:#0B1BDB"><use href="#lumna-pinwheel"/></svg></span>
+    <span>Setup CRM <svg style="color:#0B1BDB"><use href="#lumna-pinwheel"/></svg> AI Chatbot <svg style="color:#0B1BDB"><use href="#lumna-pinwheel"/></svg> Claude AI Class <svg style="color:#0B1BDB"><use href="#lumna-pinwheel"/></svg> Automate Your Business Operation <svg style="color:#0B1BDB"><use href="#lumna-pinwheel"/></svg></span>
+  </div></div>
+</div>
+
+<!-- =====================================================================
+  ABOUT  (masalah → satu sistem)
+====================================================================== -->
+<section class="lumna-section" id="lumna-about">
+  <div class="lumna-container lumna-about__grid">
+    <div class="lumna-about__copy">
+      <p class="lumna-eyebrow lumna-reveal">Kenapa LumnaTech</p>
+      <h2 class="lumna-h2 lumna-reveal" style="--i:1">Chat Masuk Dari Merata Tempat. <span class="lumna-hl">Kami Satukan.</span></h2>
+      <!-- (ayat di bawah menyala perkataan demi perkataan bila scroll) -->
+      <p class="lumna-words" data-lumna-words>Bila mesej customer berselerak di WhatsApp, Instagram, Facebook dan TikTok, lead mudah tercicir. <span class="lumna-w--b-group">LumnaTech satukan semuanya dalam satu sistem.</span></p>
+      <div class="lumna-points" data-lumna-play>
+        <div class="lumna-point lumna-reveal" style="--i:1">
+          <!-- Animasi: mesej dari 3 saluran masuk ke satu inbox -->
+          <div class="lumna-pv lumna-pv--inbox" aria-hidden="true">
+            <i class="lumna-pv__dot" style="--tx:18px;--ty:18px;--c:#25D366;left:6px;top:6px"></i>
+            <i class="lumna-pv__dot" style="--tx:0px;--ty:20px;--c:#E1306C;left:28px;top:4px;animation-delay:.5s"></i>
+            <i class="lumna-pv__dot" style="--tx:-18px;--ty:18px;--c:#1877F2;right:6px;top:6px;animation-delay:1s"></i>
+            <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#lumna-i-inbox"/></svg>
+          </div>
+          <h3>Satu Inbox</h3>
+          <p>Chat WhatsApp, Instagram, Facebook &amp; TikTok masuk dalam satu tempat.</p>
+        </div>
+        <div class="lumna-point lumna-reveal" style="--i:2">
+          <!-- Animasi: gelang masa berjalan, kemudian mesej susulan "dihantar" -->
+          <div class="lumna-pv lumna-pv--follow" aria-hidden="true">
+            <svg class="lumna-pv__ring" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26"/></svg>
+            <span class="lumna-pv__badge"><svg fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><use href="#lumna-i-check"/></svg></span>
+            <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#lumna-i-bell"/></svg>
+          </div>
+          <h3>Auto Follow-Up</h3>
+          <p>Reminder &amp; mesej susulan dihantar automatik, tepat pada masanya.</p>
+        </div>
+        <div class="lumna-point lumna-reveal" style="--i:3">
+          <!-- Animasi: lead bergerak melalui peringkat pipeline -->
+          <div class="lumna-pv lumna-pv--pipe" aria-hidden="true">
+            <span class="lumna-pv__cols"><i></i><i></i><i></i></span>
+            <span class="lumna-pv__lead"></span>
+          </div>
+          <h3>Pipeline Jelas</h3>
+          <p>Nampak status setiap lead, dari baru masuk sampai closing.</p>
+        </div>
+      </div>
+    </div>
+    <div class="lumna-about__visual lumna-reveal lumna-reveal--r" data-lumna-play>
+
+      <div class="lumna-photo lumna-about__photo">
+        <img data-lumna-img="channels" alt="Semua saluran media sosial disambungkan ke satu sistem" width="1254" height="1254" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+  SOLUTIONS
+====================================================================== -->
+<section class="lumna-section lumna-solutions" id="lumna-solutions">
+  <div class="lumna-container">
+    <div class="lumna-head">
+      <p class="lumna-eyebrow lumna-reveal">Solusi Kami</p>
+      <h2 class="lumna-h2 lumna-reveal" style="--i:1">Solusi Yang Memudahkan <span class="lumna-mark">Cara Bisnes Anda Bekerja.</span></h2>
+      <p class="lumna-lead lumna-reveal" style="--i:2">Setup CRM dan AI Chatbot untuk urus customer dan sales, atau latihan Claude AI untuk team anda.</p>
+    </div>
+
+    <div class="lumna-stack" data-lumna-stack>
+      <!-- 01 CRM -->
+      <article class="lumna-scard" style="--i:0">
+        <div class="lumna-scard__in">
+          <div>
+            <p class="lumna-scard__num"><b>01</b><span class="lumna-scard__cat">Done For You</span></p>
+            <p class="lumna-scard__label"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-kanban"/></svg>Setup CRM</p>
+            <h3>Urus Customer &amp; Sales Dalam Satu Sistem.</h3>
+            <p class="lumna-scard__desc">Kami setup CRM ikut cara bisnes anda bekerja, supaya data customer, status lead dan follow-up mudah dipantau.</p>
+            <ul class="lumna-checks">
+              <li><span><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-check"/></svg></span>Pipeline jualan dari New Lead hingga Closed Won</li>
+              <li><span><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-check"/></svg></span>Chat WhatsApp, FB, IG &amp; TikTok dalam satu inbox</li>
+              <li><span><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-check"/></svg></span>Automasi follow-up, reminder &amp; tugasan team</li>
+            </ul>
+            <a class="lumna-btn lumna-btn--b" href="#" data-lumna-link="crm">Lihat Setup CRM <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg></a>
+          </div>
+          <div class="lumna-scard__media">
+            <span class="lumna-scard__tag">Setup CRM</span>
+            <img data-lumna-img="crm" alt="Pipeline CRM dengan lead dari WhatsApp, Instagram, Facebook dan TikTok" width="1254" height="1254" loading="lazy">
+          </div>
+          <span class="lumna-scard__shade" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <!-- 02 AI CHATBOT -->
+      <article class="lumna-scard lumna-scard--blue lumna-scard--flip" style="--i:1">
+        <div class="lumna-scard__in">
+          <div>
+            <p class="lumna-scard__num"><b>02</b><span class="lumna-scard__cat">Done For You</span></p>
+            <p class="lumna-scard__label"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-msg"/></svg>Setup AI Chatbot</p>
+            <h3>Customer Dijawab, Walaupun Anda Sibuk.</h3>
+            <p class="lumna-scard__desc">AI Chatbot jawab soalan biasa, kumpul maklumat prospek dan serahkan kepada team bila tiba masa closing.</p>
+            <ul class="lumna-checks">
+              <li><span><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-check"/></svg></span>Respons automatik untuk soalan lazim</li>
+              <li><span><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-check"/></svg></span>Kumpul nama, nombor &amp; keperluan prospek</li>
+              <li><span><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-check"/></svg></span>Disambung terus ke CRM &amp; follow-up</li>
+            </ul>
+            <a class="lumna-btn lumna-btn--y" href="#" data-lumna-link="chatbot">Lihat AI Chatbot <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg></a>
+          </div>
+          <div class="lumna-scard__media">
+            <span class="lumna-scard__tag">AI Chatbot</span>
+            <img data-lumna-img="chatbot" alt="AI dan automasi dalam dashboard CRM" width="1671" height="941" loading="lazy">
+          </div>
+          <span class="lumna-scard__shade" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <!-- 03 CLAUDE AI CLASS -->
+      <article class="lumna-scard lumna-scard--y" style="--i:2">
+        <div class="lumna-scard__in">
+          <div>
+            <p class="lumna-scard__num"><b>03</b><span class="lumna-scard__cat">AI Training</span></p>
+            <p class="lumna-scard__label" style="color:var(--ink)"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-cap"/></svg>Claude AI Class</p>
+            <h3>Belajar Guna AI Untuk Kerja Harian.</h3>
+            <p class="lumna-scard__desc">Kelas praktikal untuk anda dan team. Hasilkan content, sediakan dokumen dan siapkan kerja dengan lebih pantas.</p>
+            <ul class="lumna-checks">
+              <li><span><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-check"/></svg></span>Content, caption &amp; idea marketing</li>
+              <li><span><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-check"/></svg></span>Proposal, dokumen &amp; email</li>
+              <li><span><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-check"/></svg></span>Susun idea &amp; tingkatkan produktiviti</li>
+            </ul>
+            <a class="lumna-btn lumna-btn--ink" href="#" data-lumna-link="claude">Lihat Kelas Claude AI <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg></a>
+          </div>
+          <div class="lumna-scard__media" data-lumna-play>
+            <span class="lumna-scard__tag">Claude AI Class</span>
+            <img data-lumna-img="claude" alt="Claude AI Class" loading="lazy" hidden>
+            <div class="lumna-claude" data-lumna-claude aria-hidden="true">
+              <div class="lumna-cwin">
+                <div class="lumna-cwin__bar"><i></i><i></i><i></i>Latihan Claude AI<em>Contoh</em></div>
+                <div class="lumna-cmsg">Tulis 5 idea caption untuk promosi hujung bulan kedai saya.</div>
+                <div class="lumna-creply">
+                  <div class="lumna-creply__h"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#lumna-i-spark"/></svg>Claude sedang menulis…</div>
+                  <span class="lumna-cl"></span><span class="lumna-cl"></span><span class="lumna-cl"></span><span class="lumna-cl"></span>
+                </div>
+              </div>
+              <div class="lumna-cskills"><span>Content &amp; Idea</span><span>Proposal &amp; Dokumen</span><span>Produktiviti</span></div>
+            </div>
+          </div>
+          <span class="lumna-scard__shade" aria-hidden="true"></span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+  OUR WORK
+====================================================================== -->
+<section class="lumna-section" id="lumna-work">
+  <div class="lumna-container lumna-work__grid">
+    <div class="lumna-work__visual lumna-reveal lumna-reveal--l" data-lumna-play>
+      <div class="lumna-photo lumna-work__photo">
+        <img data-lumna-img="work" alt="Dashboard CRM menunjukkan prestasi team" width="1254" height="1254" loading="lazy">
+        <span class="lumna-hot" data-hot="1" style="left:66%;top:41%">1</span>
+        <span class="lumna-hot" data-hot="2" style="left:64%;top:51%">2</span>
+        <span class="lumna-hot" data-hot="3" style="left:74%;top:62%">3</span>
+        <span class="lumna-hot" data-hot="4" style="left:47%;top:50%">4</span>
+      </div>
+    </div>
+    <div>
+      <p class="lumna-eyebrow lumna-reveal">Apa Yang Kami Bina</p>
+      <h2 class="lumna-h2 lumna-reveal" style="--i:1">Semua Prestasi Bisnes, <span class="lumna-hl">Dalam Satu Skrin.</span></h2>
+      <p class="lumna-lead lumna-reveal" style="--i:2">Setiap sistem yang kami setup direka supaya pemilik bisnes boleh pantau lead, appointment dan prestasi team tanpa perlu tanya satu-satu.</p>
+      <ul class="lumna-legend" data-lumna-legend>
+        <li class="lumna-reveal" style="--i:2" data-hot="1"><b>1</b><div><h3>Lead &amp; appointment</h3><p>Jumlah lead baru dan temujanji, terus dari dashboard.</p></div></li>
+        <li class="lumna-reveal" style="--i:3" data-hot="2"><b>2</b><div><h3>Graf prestasi</h3><p>Lihat trend jualan dan aktiviti dari minggu ke minggu.</p></div></li>
+        <li class="lumna-reveal" style="--i:4" data-hot="3"><b>3</b><div><h3>Prestasi setiap ahli team</h3><p>Tahu siapa yang follow-up dan siapa yang perlukan bantuan.</p></div></li>
+        <li class="lumna-reveal" style="--i:5" data-hot="4"><b>4</b><div><h3>Pipeline, kalendar &amp; automasi</h3><p>Semua modul penting dalam satu menu yang mudah.</p></div></li>
+      </ul>
+      <div class="lumna-work__ctas lumna-reveal" style="--i:5">
+        <a class="lumna-btn lumna-btn--b" href="#" data-lumna-link="crm">Bincang Setup Sistem <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg></a>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+  PROCESS
+====================================================================== -->
+<section class="lumna-section lumna-process" id="lumna-process">
+  <div class="lumna-container" style="position:relative">
+    <div class="lumna-head">
+      <p class="lumna-eyebrow lumna-reveal">Cara Kami Bekerja</p>
+      <h2 class="lumna-h2 lumna-process__h lumna-reveal" style="--i:1"><span>Setiap Bisnes Berbeza.</span><span class="lumna-process__y">Jadi, Solusinya Pun Tak Sama.</span></h2>
+      <p class="lumna-lead lumna-reveal" style="--i:2">Kami faham dulu keperluan anda, baru kami cadangkan sistem yang sesuai.</p>
+    </div>
+    <div class="lumna-steps" data-lumna-observe>
+      <div class="lumna-steps__track" aria-hidden="true"><span class="lumna-steps__fill"></span></div>
+      <ol>
+        <li class="lumna-step" style="--i:0"><div class="lumna-step__node"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-search"/></svg></div><span class="lumna-step__num">Langkah 01</span><h3>Faham Keperluan</h3><p>Kami dengar dulu apa cabaran yang anda nak selesaikan.</p></li>
+        <li class="lumna-step" style="--i:1"><div class="lumna-step__node"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-bulb"/></svg></div><span class="lumna-step__num">Langkah 02</span><h3>Cadangkan Solusi</h3><p>Kami bantu kenal pasti latihan AI atau sistem yang sesuai.</p></li>
+        <li class="lumna-step" style="--i:2"><div class="lumna-step__node"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-wrench"/></svg></div><span class="lumna-step__num">Langkah 03</span><h3>Setup &amp; Pelaksanaan</h3><p>Kami jalankan konfigurasi dan implementasi mengikut skop yang dipersetujui.</p></li>
+        <li class="lumna-step" style="--i:3"><div class="lumna-step__node"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-rocket"/></svg></div><span class="lumna-step__num">Langkah 04</span><h3>Mula Gunakan</h3><p>Kami bantu pengenalan sistem dan handover kepada team anda.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+  TESTIMONI  (isi melalui LUMNA_CONFIG.testimonials & clientLogos)
+====================================================================== -->
+<section class="lumna-section" id="lumna-testimoni" style="background:var(--tint)">
+  <div class="lumna-container">
+    <div class="lumna-logos lumna-reveal">
+      <p class="lumna-logos__label">Bisnes yang bekerjasama dengan LumnaTech</p>
+      <div class="lumna-marq" style="--dur:30s" data-lumna-play><div class="lumna-marq__track" data-lumna-logos></div></div>
+    </div>
+    <div class="lumna-head">
+      <p class="lumna-eyebrow lumna-reveal">Testimoni</p>
+      <h2 class="lumna-h2 lumna-reveal" style="--i:1">Apa Kata Mereka Yang Dah Guna <span class="lumna-mark">LumnaTech.</span></h2>
+    </div>
+  </div>
+  <div class="lumna-tm lumna-reveal" style="--i:2">
+    <div class="lumna-marq lumna-marq--tm" style="--dur:45s" data-lumna-play><div class="lumna-marq__track" data-lumna-tm></div></div>
+  </div>
+</section>
+
+<!-- =====================================================================
+  CTA
+====================================================================== -->
+<section class="lumna-cta-wrap" style="background:var(--tint)">
+  <div class="lumna-container">
+    <div class="lumna-cta lumna-reveal lumna-reveal--zoom" id="lumna-contact-cta">
+      <svg class="lumna-pin" aria-hidden="true" data-lumna-play><use href="#lumna-pinwheel"/></svg>
+      <div class="lumna-cta__in">
+        <p class="lumna-eyebrow">Jom Mula</p>
+        <h2>Sedia Nak <span style="color:var(--y)">Automasikan</span> Bisnes Anda?</h2>
+        <p>Ceritakan keperluan bisnes anda. Kami bantu cadangkan solusi yang paling sesuai.</p>
+        <div class="lumna-cta__btns">
+          <a class="lumna-btn lumna-btn--y" href="#" data-lumna-link="contact">Hubungi Team Kami <svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg></a>
+        </div>
+        <div class="lumna-cta__svc">
+          <a href="#" data-lumna-link="crm">Setup CRM</a>
+          <a href="#" data-lumna-link="chatbot">AI Chatbot</a>
+          <a href="#" data-lumna-link="claude">Claude AI Class</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+  FOOTER
+====================================================================== -->
+<footer class="lumna-footer">
+  <div class="lumna-container">
+    <div class="lumna-footer__grid">
+      <div class="lumna-footer__brand">
+        <a class="lumna-logo" href="#" data-lumna-link="home" aria-label="LumnaTech"><img data-lumna-img="logo" alt="LumnaTech" width="182" height="60" loading="lazy"></a>
+        <p class="lumna-footer__desc">LumnaTech membantu bisnes automasikan operasi melalui setup CRM, AI Chatbot dan latihan Claude AI untuk team.</p>
+      </div>
+      <div>
+        <h4>Servis</h4>
+        <ul class="lumna-footer__links">
+          <li><a href="#" data-lumna-link="crm">Setup CRM</a></li>
+          <li><a href="#" data-lumna-link="chatbot">Setup AI Chatbot</a></li>
+          <li><a href="#" data-lumna-link="claude">Claude AI Class</a></li>
+          <li><a href="#" data-lumna-link="contact">Hubungi Kami</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hubungi</h4>
+        <!-- Ganti placeholder dengan maklumat rasmi -->
+        <ul class="lumna-footer__contact">
+          <li><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-mail"/></svg><a href="#" data-lumna-email>[EMEL_RASMI]</a></li>
+          <li><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-pin"/></svg><span data-lumna-address>[ALAMAT_LUMNATECH]</span></li>
+        </ul>
+        <a class="lumna-wa" href="#" data-lumna-link="whatsapp" target="_blank" rel="noopener">
+          <span class="lumna-wa__ic"><svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-phone"/></svg></span>
+          WhatsApp Kami
+        </a>
+      </div>
+    </div>
+    <div class="lumna-footer__bottom">
+      <span>Copyright © 2026 LumnaTech. Hak cipta terpelihara.</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#lumna-home -->
+
+<script>
+/* =====================================================================
+   ANIMATION JAVASCRIPT
+===================================================================== */
+(function () {
+  'use strict';
+  function init() {
+    if (window.__lumnaHomeInit) return;
+    var root = document.getElementById('lumna-home');
+    if (!root) return;
+    window.__lumnaHomeInit = true;
+    root.classList.add('lumna-js');
+
+    var CFG = window.LUMNA_CONFIG || {};
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var hasIO = 'IntersectionObserver' in window;
+    var $$ = function (s, c) { return Array.prototype.slice.call((c || root).querySelectorAll(s)); };
+    var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]; }); };
+
+    /* ---------- 1. Pautan & gambar dari config ---------- */
+    var links = CFG.links || {};
+    $$('[data-lumna-link]').forEach(function (a) {
+      var url = links[a.getAttribute('data-lumna-link')];
+      if (url === '#top') {
+        a.setAttribute('href', '#lumna-top');
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+        });
+      } else if (url && url.charAt(0) !== '[') {
+        a.setAttribute('href', url);
+        if (/^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(url)) { a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener'); }
+      }
+      else { a.setAttribute('href', '#'); a.addEventListener('click', function (e) { e.preventDefault(); }); }
+    });
+    var contact = CFG.contact || {};
+    var emEl = root.querySelector('[data-lumna-email]');
+    if (emEl && contact.email) { emEl.textContent = contact.email; if (contact.email.charAt(0) !== '[') emEl.href = 'mailto:' + contact.email; }
+    var adEl = root.querySelector('[data-lumna-address]');
+    if (adEl && contact.address) adEl.textContent = contact.address;
+    var imgs = CFG.images || {};
+    $$('[data-lumna-img]').forEach(function (img) {
+      var key = img.getAttribute('data-lumna-img'), url = imgs[key];
+      if (url) {
+        img.src = url; img.hidden = false;
+        if (key === 'claude') { var v = root.querySelector('[data-lumna-claude]'); if (v) v.style.display = 'none'; }
+      } else if (key === 'logo') {
+        var s = document.createElement('span'); s.className = 'lumna-logo__txt'; s.textContent = 'LumnaTech'; img.replaceWith(s);
+      }
+    });
+
+    /* ---------- 2. Testimoni & logo ---------- */
+    var star = '<svg viewBox="0 0 24 24"><use href="#lumna-i-star"/></svg>';
+    function tCard(t, i) {
+      var initial = esc((t.name || '?').replace(/^(teacher|dr|puan|encik|cik|tuan)\s+/i, '').charAt(0) || '?');
+      var res = '';
+      if (t.result && t.result.rows && t.result.rows.length) {
+        var arrow = '<svg class="lumna-tres__arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg>';
+        res = '<div class="lumna-tres"><p class="lumna-tres__t">' + esc(t.result.title) + '</p><div class="lumna-tres__grid">' +
+          t.result.rows.map(function (r, k, all) {
+            return (k ? arrow : '') + '<div class="lumna-tres__cell' + (k === all.length - 1 ? ' is-key' : '') + '"><span>' + esc(r[0]) + '</span><b>' + esc(r[1]) + '</b></div>';
+          }).join('') + '</div></div>';
+      }
+      if (t.link && t.link.url) {
+        res += '<a class="lumna-tlink" href="' + esc(t.link.url) + '" target="_blank" rel="noopener">' + esc(t.link.label || 'Lihat website') +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#lumna-i-arrow"/></svg></a>';
+      }
+      var av = t.photo ? '<img class="lumna-tcard__av" src="' + esc(t.photo) + '" alt="' + esc(t.name) + '" loading="lazy">' : '<span class="lumna-tcard__av">' + initial + '</span>';
+      return '<article class="lumna-tcard">' +
+        '<div class="lumna-tcard__who">' + av + '<div><strong>' + esc(t.name) + '</strong><small>' + esc(t.role) + '</small></div></div>' +
+        '<div class="lumna-tcard__top"><span class="lumna-stars">' + star + star + star + star + star + '</span>' +
+        (t.tag ? '<span class="lumna-tcard__tag">' + esc(t.tag) + '</span>' : '') + '</div>' +
+        '<blockquote>&ldquo;' + esc(t.quote) + '&rdquo;</blockquote>' + res + '</article>';
+    }
+    var tms = CFG.testimonials || [], ttrack = root.querySelector('[data-lumna-tm]');
+    if (ttrack) {
+      if (!tms.length) ttrack.closest('.lumna-tm').style.display = 'none';
+      else {
+        /* Ulang senarai sampai cukup panjang untuk gelung yang lancar */
+        var reps = Math.max(1, Math.ceil(6 / tms.length)), set = '';
+        for (var q = 0; q < reps; q++) set += tms.map(tCard).join('');
+        ttrack.innerHTML = set + set;
+        $$('.lumna-tcard', ttrack).forEach(function (c, i) { if (i >= tms.length) c.setAttribute('aria-hidden', 'true'); });
+        if (reduced) ttrack.innerHTML = tms.map(tCard).join('');
+      }
+    }
+    var logoTrack = root.querySelector('[data-lumna-logos]');
+    if (logoTrack) {
+      var lg = (CFG.clientLogos || []).map(function (l) {
+        return '<div class="lumna-logo-item' + (l.img ? ' has-img' : '') + '">' + (l.img ? '<img src="' + esc(l.img) + '" alt="' + esc(l.name) + '" decoding="async">' : esc(l.name)) + '</div>';
+      }).join('');
+      if (lg) logoTrack.innerHTML = lg + lg; else logoTrack.closest('.lumna-logos').style.display = 'none';
+      /* Saiz visual seragam: setiap logo diberi "luas" yang sama, jadi logo
+         panjang tak nampak kecil dan logo segi empat tak nampak besar. */
+      var sizeLogo = function (img) {
+        var w = img.naturalWidth, h = img.naturalHeight; if (!w || !h) return;
+        var small = window.innerWidth < 768, A = small ? 4200 : 6600, maxH = small ? 50 : 64, maxW = small ? 128 : 164;
+        var a = w / h, hh = Math.sqrt(A / a), ww = hh * a;
+        if (hh > maxH) { hh = maxH; ww = hh * a; }
+        if (ww > maxW) { ww = maxW; hh = ww / a; }
+        img.style.width = Math.round(ww) + 'px'; img.style.height = Math.round(hh) + 'px';
+      };
+      $$('.lumna-logo-item img', logoTrack).forEach(function (img) {
+        if (img.complete) sizeLogo(img); else img.addEventListener('load', function () { sizeLogo(img); });
+      });
+    }
+
+    /* ---------- 3. Navigation ---------- */
+    var nav = root.querySelector('[data-lumna-nav]');
+    var dds = $$('[data-lumna-dd]');
+    function closeDDs(except) {
+      dds.forEach(function (b) { if (b !== except) { b.parentNode.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); } });
+    }
+    dds.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = !btn.parentNode.classList.contains('is-open');
+        closeDDs(btn);
+        btn.parentNode.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+    document.addEventListener('click', function (e) { if (!e.target.closest || !e.target.closest('#lumna-home .lumna-dd')) closeDDs(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDDs(); });
+    $$('[data-lumna-scroll]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var t = root.querySelector(a.getAttribute('href')); if (!t) return;
+        e.preventDefault();
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - nav.offsetHeight + 1, behavior: reduced ? 'auto' : 'smooth' });
+      });
+    });
+
+    /* ---------- 4. Scroll reveal ---------- */
+    var revealEls = $$('.lumna-reveal, [data-lumna-observe]');
+    if (reduced || !hasIO) revealEls.forEach(function (el) { el.classList.add('is-in'); });
+    else {
+      var rio = new IntersectionObserver(function (en) {
+        en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); rio.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+      revealEls.forEach(function (el) { rio.observe(el); });
+    }
+
+    /* ---------- 5. Pause animasi di luar skrin ---------- */
+    var playEls = $$('[data-lumna-play]');
+    if (!hasIO) playEls.forEach(function (el) { el.classList.add('is-playing'); });
+    else {
+      var pio = new IntersectionObserver(function (en) { en.forEach(function (e) { e.target.classList.toggle('is-playing', e.isIntersecting); }); });
+      playEls.forEach(function (el) { pio.observe(el); });
+    }
+
+    /* ---------- 6. Scroll-highlight perkataan ---------- */
+    var words = root.querySelector('[data-lumna-words]'), wordEls = [];
+    if (words && !reduced) {
+      var out = [];
+      Array.prototype.forEach.call(words.childNodes, function (node) {
+        var blue = node.nodeType === 1;
+        (node.textContent || '').split(/(\s+)/).forEach(function (w) {
+          if (!w) return;
+          out.push(/^\s+$/.test(w) ? w : '<span class="lumna-w' + (blue ? ' lumna-w--b' : '') + '">' + esc(w) + '</span>');
+        });
+      });
+      words.innerHTML = out.join('');
+      wordEls = $$('.lumna-w', words);
+    }
+
+    /* ---------- 7. Kad bertindan (Solutions) ----------
+       Kedudukan sticky setiap kad dikira ikut tinggi skrin: jika kad lebih
+       tinggi dari ruang yang ada, kad akan scroll dulu sampai butangnya
+       kelihatan, barulah ia melekat dan kad seterusnya menindih. */
+    var stackOn = function () { return !reduced && window.innerWidth > 960; };
+    var cards = $$('.lumna-scard', root.querySelector('[data-lumna-stack]') || root);
+    function layoutCards() {
+      if (!stackOn()) return;
+      var navH = nav.offsetHeight || 78, vh = window.innerHeight;
+      cards.forEach(function (c, i) {
+        var ideal = navH + 24 + i * 22, fit = vh - c.offsetHeight - 28;
+        c.style.setProperty('--top', Math.round(Math.min(ideal, fit)) + 'px');
+      });
+    }
+
+    /* ---------- Satu gelung scroll (rAF) ---------- */
+    var ticking = false;
+    function onFrame() {
+      ticking = false;
+      var vh = window.innerHeight, y = window.pageYOffset;
+      nav.classList.toggle('is-scrolled', y > 8);
+      if (wordEls.length) {
+        var r = words.getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) {
+          var p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+          var n = Math.round(p * wordEls.length);
+          for (var i = 0; i < wordEls.length; i++) wordEls[i].classList.toggle('is-lit', i < n);
+        }
+      }
+      if (stackOn()) {
+        for (var k = 0; k < cards.length - 1; k++) {
+          var a = cards[k].getBoundingClientRect(), b = cards[k + 1].getBoundingClientRect();
+          var h = cards[k].offsetHeight;
+          var prog = Math.min(1, Math.max(0, 1 - (b.top - a.top) / h));
+          cards[k].style.setProperty('--p', prog.toFixed(3));
+        }
+      }
+    }
+    function req() { if (!ticking) { ticking = true; window.requestAnimationFrame(onFrame); } }
+    window.addEventListener('scroll', req, { passive: true });
+    window.addEventListener('resize', function () { layoutCards(); req(); }, { passive: true });
+    window.addEventListener('load', function () { layoutCards(); req(); });
+    $$('img', root.querySelector('[data-lumna-stack]') || root).forEach(function (im) { im.addEventListener('load', layoutCards); });
+    layoutCards();
+    onFrame();
+
+    /* ---------- 8. Hero tilt (desktop) ---------- */
+    var tiltWrap = root.querySelector('[data-lumna-tilt]');
+    if (tiltWrap && finePointer && !reduced) {
+      var tilt = tiltWrap.querySelector('.lumna-tilt'), hero = root.querySelector('.lumna-hero');
+      hero.addEventListener('mousemove', function (e) {
+        var r = tiltWrap.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width / 2)) / r.width, dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        tilt.style.transform = 'rotateY(' + (dx * 8).toFixed(2) + 'deg) rotateX(' + (-dy * 8).toFixed(2) + 'deg)';
+      });
+      hero.addEventListener('mouseleave', function () { tilt.style.transform = ''; });
+    }
+
+    /* ---------- 9. Notifikasi hero (feed) ---------- */
+    var feed = root.querySelector('[data-lumna-feed]');
+    if (feed && !reduced) {
+      var ic = function (id) { return '<svg class="lumna-ic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#lumna-i-' + id + '"/></svg>'; };
+      var msgs = [
+        ['g', 'msg', 'Lead baru dari WhatsApp', 'Terus masuk ke CRM'],
+        ['', 'spark', 'AI Chatbot dah balas', 'Soalan customer dijawab'],
+        ['y', 'kanban', 'Pipeline dikemas kini', 'New Lead → Follow Up'],
+        ['ink', 'task', 'Tugasan follow-up dihantar', 'Kepada team sales'],
+        ['', 'users', 'Lead baru dari Instagram', 'Profil prospek direkod']
+      ];
+      var mi = 2, feedTimer = null, heroVisible = true;
+      function pushToast() {
+        var m = msgs[mi++ % msgs.length];
+        var el = document.createElement('div');
+        el.className = 'lumna-toast';
+        el.innerHTML = '<span class="lumna-toast__ic' + (m[0] ? ' lumna-toast__ic--' + m[0] : '') + '">' + ic(m[1]) + '</span><div><strong>' + m[2] + '</strong><small>' + m[3] + '</small></div>';
+        feed.appendChild(el);
+        var all = feed.querySelectorAll('.lumna-toast:not(.is-out)');
+        if (all.length > 3) { var old = all[0]; old.classList.add('is-out'); setTimeout(function () { old.remove(); }, 450); }
+      }
+      function startFeed() { if (!feedTimer) feedTimer = setInterval(pushToast, 2600); }
+      function stopFeed() { clearInterval(feedTimer); feedTimer = null; }
+      if (hasIO) new IntersectionObserver(function (en) { heroVisible = en[0].isIntersecting; if (heroVisible && !document.hidden) startFeed(); else stopFeed(); }).observe(feed);
+      else startFeed();
+      document.addEventListener('visibilitychange', function () { if (document.hidden) stopFeed(); else if (heroVisible) startFeed(); });
+    }
+
+    /* ---------- 10. Hotspot ↔ legend ---------- */
+    var hots = $$('.lumna-hot'), legend = $$('[data-lumna-legend] li'), hotIdx = 0, hotTimer = null;
+    function setHot(n) {
+      hots.forEach(function (h) { h.classList.toggle('is-on', h.getAttribute('data-hot') === String(n)); });
+      legend.forEach(function (l) { l.classList.toggle('is-on', l.getAttribute('data-hot') === String(n)); });
+    }
+    legend.concat(hots).forEach(function (el) {
+      el.addEventListener('mouseenter', function () { clearInterval(hotTimer); hotTimer = null; setHot(el.getAttribute('data-hot')); });
+      el.addEventListener('click', function () { clearInterval(hotTimer); hotTimer = null; setHot(el.getAttribute('data-hot')); });
+    });
+    if (legend.length) {
+      setHot(1);
+      if (!reduced) hotTimer = setInterval(function () { hotIdx = (hotIdx + 1) % legend.length; setHot(hotIdx + 1); }, 3200);
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+
+</body></html>
